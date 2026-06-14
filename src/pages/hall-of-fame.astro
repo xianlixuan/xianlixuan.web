@@ -1,0 +1,179 @@
+---
+export const prerender = true;
+
+import { LinkPresets } from "@constants/link-presets";
+import { LinkPreset } from "@/types/config";
+import GridLayout from "@layouts/grid.astro";
+import BackwardButton from "@components/backwardButton.astro";
+
+
+const pageTitle = LinkPresets[LinkPreset.HallOfFame].name;
+const pageDescription = LinkPresets[LinkPreset.HallOfFame].description;
+
+type Achievement = {
+    title: string;
+    meta: string;
+    description: string;
+    accent: "cyan" | "violet" | "amber";
+    tags: string[];
+};
+
+const achievements: Achievement[] = [
+    {
+        title: "CTF Highlights",
+        meta: "Write-ups, flags, and challenge wins",
+        description: "A dedicated space for standout solves, memorable machines, and the flags that shaped your offensive security workflow.",
+        accent: "cyan",
+        tags: ["CTF", "Write-ups", "Challenges"],
+    },
+    {
+        title: "Certifications",
+        meta: "Security learning milestones",
+        description: "Use this area to showcase certifications, training paths, and lab achievements that support your hands-on cyber work.",
+        accent: "violet",
+        tags: ["OSCP", "CPTS", "Labs"],
+    },
+    {
+        title: "Competition Log",
+        meta: "Events, rankings, and team runs",
+        description: "A clean timeline for competitions, placements, teammates, and short notes from each event you joined.",
+        accent: "amber",
+        tags: ["Events", "Rankings", "Teams"],
+    },
+];
+---
+
+<GridLayout title={pageTitle} description={pageDescription}>
+    <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full">
+            <BackwardButton currentPath={Astro.url.pathname} />
+
+            <header class="mb-8">
+                <h1 class="text-4xl font-bold text-black/90 dark:text-white/90 mb-2">
+                    {pageTitle}
+                </h1>
+                <p class="text-lg text-black/60 dark:text-white/60">
+                    {pageDescription}
+                </p>
+            </header>
+
+            <section class="hof-hero mb-8">
+                <p class="hof-kicker">Achievement Board</p>
+                <h2 class="hof-title">A dedicated space for your toughest wins.</h2>
+                <p class="hof-copy">
+                    This page is now wired into the navigation and ready to become the public record of your certifications,
+                    CTF milestones, competition history, and standout challenge solves.
+                </p>
+            </section>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {achievements.map((item) => (
+                    <article class={`hof-card hof-${item.accent}`}>
+                        <div class="hof-card-bar"></div>
+                        <div class="flex flex-col gap-1">
+                            <p class="hof-meta">{item.meta}</p>
+                            <h2 class="text-xl font-bold text-black/90 dark:text-white/90">{item.title}</h2>
+                        </div>
+                        <p class="text-sm text-black/70 dark:text-white/70">{item.description}</p>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            {item.tags.map((tag) => (
+                                <span class="hof-tag">{tag}</span>
+                            ))}
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </div>
+    </div>
+</GridLayout>
+
+<style>
+    .hof-hero {
+        border: 1px solid color-mix(in oklch, var(--primary), transparent 82%);
+        border-radius: calc(var(--radius-large) * 0.95);
+        padding: 1.5rem;
+        background:
+            linear-gradient(135deg, color-mix(in oklch, var(--primary), transparent 92%), transparent 60%),
+            var(--card-bg);
+    }
+
+    .hof-kicker {
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+    }
+
+    .hof-title {
+        font-size: clamp(1.45rem, 2vw, 2.3rem);
+        font-weight: 700;
+        color: color-mix(in oklch, var(--text-normal), white 8%);
+        margin-bottom: 0.65rem;
+    }
+
+    .hof-copy {
+        max-width: 52rem;
+        color: color-mix(in oklch, var(--text-normal), transparent 28%);
+        line-height: 1.7;
+    }
+
+    .hof-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-large);
+        border: 1px solid var(--line-divider);
+        background: var(--card-bg);
+        padding: 1.35rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .hof-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 32px color-mix(in oklch, black, transparent 80%);
+    }
+
+    .hof-card-bar {
+        width: 3.2rem;
+        height: 0.3rem;
+        border-radius: 999px;
+        background: currentColor;
+        opacity: 0.95;
+    }
+
+    .hof-meta {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: currentColor;
+        opacity: 0.92;
+    }
+
+    .hof-tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 0.28rem 0.7rem;
+        font-size: 0.78rem;
+        background: color-mix(in oklch, currentColor, transparent 88%);
+        color: currentColor;
+    }
+
+    .hof-cyan {
+        color: #35c8ff;
+        border-color: color-mix(in oklch, #35c8ff, transparent 72%);
+    }
+
+    .hof-violet {
+        color: #9e7dff;
+        border-color: color-mix(in oklch, #9e7dff, transparent 72%);
+    }
+
+    .hof-amber {
+        color: #ffb347;
+        border-color: color-mix(in oklch, #ffb347, transparent 72%);
+    }
+</style>

@@ -1,5 +1,87 @@
 @import 'tailwindcss';
 
+/* 字体导入 - JetBrains Mono (mono) for code */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* Local fonts — Novecento Sans Wide (display) + Plus Jakarta Sans (body) */
+@font-face {
+    font-family: 'Novecento';
+    src: url('/assets/fonts/Novecentosanswide-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Novecento';
+    src: url('/assets/fonts/Novecentosanswide-Normal.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Novecento';
+    src: url('/assets/fonts/Novecentosanswide-DemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/assets/fonts/PlusJakartaSans.woff2') format('woff2-variations'),
+         url('/assets/fonts/PlusJakartaSans.woff2') format('woff2');
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+}
+/* When document is switched to Thai by translate.js, use a normal Thai UI stack */
+:lang(th) {
+    font-family: var(--font-thai);
+    font-size: 1.03em;
+    line-height: 1.78;
+    letter-spacing: 0;
+    font-style: normal;
+}
+:lang(th) h1, :lang(th) h2, :lang(th) h3, :lang(th) h4, :lang(th) h5, :lang(th) h6 {
+    font-family: var(--font-thai);
+    letter-spacing: 0;
+    font-style: normal;
+}
+/* Keep monospace + the pixel display name unaffected even under Thai */
+:lang(th) code, :lang(th) pre, :lang(th) kbd, :lang(th) samp, :lang(th) .font-mono,
+:lang(th) .intro-name, :lang(th) .intro-typewriter, :lang(th) .intro-terminal-title, :lang(th) .intro-prompt {
+    font-family: var(--font-mono);
+}
+
+:root {
+    --font-display: 'Novecento', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    --font-thai: 'Noto Sans Thai', 'Leelawadee UI', 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
+}
+
+html, body {
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01', 'ss02', 'cv01', 'cv11';
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+h4, h5, h6 {
+    font-weight: 400;
+}
+
+code, pre, kbd, samp, .font-mono {
+    font-family: var(--font-mono);
+}
+
 /* 导入相册样式 */
 @import './albums.css' layer(base);
 /* 导入追番页面样式 */
@@ -18,6 +100,9 @@
 
     --transition-duration-300: 300ms;
     --transition-duration-600: 600ms;
+
+    --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
 }
 
 

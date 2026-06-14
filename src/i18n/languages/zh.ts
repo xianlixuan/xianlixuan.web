@@ -11,6 +11,10 @@ export const zh: Translation = {
     [Key.archive]: "归档",
     [Key.about]: "关于",
     [Key.search]: "搜索",
+    [Key.hallOfFame]: "荣誉殿堂",
+    [Key.hallOfFameSubtitle]: "证书与成就展示。",
+    [Key.blog]: "博客",
+    [Key.blogSubtitle]: "所有博客文章，一处汇集。",
 
     // 文章
     [Key.directory]: "目录",

@@ -55,7 +55,7 @@ onMount(() => {
                         {#if link.icon}
                             <Icon icon={link.icon} class="text-[1.1rem] mr-2" />
                         {/if}
-                        {link.name}
+                        <span class="notranslate">{link.name}</span>
                     </div>
                     {#if !link.external}
                         <Icon icon="material-symbols:chevron-right-rounded" class="transition text-[1.25rem] text-(--primary)" />

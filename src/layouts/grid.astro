@@ -196,7 +196,7 @@ const {
 
                 <main
                     id="swup-container"
-                    class={`${mainContentClass} transition-swup-fade`}
+                    class={`${mainContentClass} ${isHomePage ? "overflow-visible" : ""} transition-swup-fade`}
                 >
                     <div id="grid-class-carrier" data-grid-class={gridCols} class="hidden"></div>
                     <div

@@ -21,81 +21,15 @@ export interface LanguageConfig {
 export const LANGUAGE_CONFIG = {
     en: {
         translateCode: "english",
-        displayName: "English",
+        displayName: "EN",
         locale: "en-US",
         icon: "🇺🇸",
     },
-    zh: {
-        translateCode: "chinese_simplified",
-        displayName: "中文",
-        locale: "zh-CN",
-        icon: "🇨🇳",
-    },
-    ru: {
-        translateCode: "russian",
-        displayName: "Русский",
-        locale: "ru-RU",
-        icon: "🇷🇺",
-    },
-    de: {
-        translateCode: "deutsch",
-        displayName: "Deutsch",
-        locale: "de-DE",
-        icon: "🇩🇪",
-    },
-    fr: {
-        translateCode: "french",
-        displayName: "Français",
-        locale: "fr-FR",
-        icon: "🇫🇷",
-    },
-    es: {
-        translateCode: "spanish",
-        displayName: "Español",
-        locale: "es-ES",
-        icon: "🇪🇸",
-    },
-    tr: {
-        translateCode: "turkish",
-        displayName: "Türkçe",
-        locale: "tr-TR",
-        icon: "🇹🇷",
-    },
-    ar: {
-        translateCode: "arabic",
-        displayName: "العربية",
-        locale: "ar-SA",
-        icon: "🇸🇦",
-    },
-    ko: {
-        translateCode: "korean",
-        displayName: "한국어",
-        locale: "ko-KR",
-        icon: "🇰🇷",
-    },
-    ja: {
-        translateCode: "japanese",
-        displayName: "日本語",
-        locale: "ja-JP",
-        icon: "🇯🇵",
-    },
     th: {
         translateCode: "thai",
-        displayName: "ไทย",
+        displayName: "TH",
         locale: "th-TH",
         icon: "🇹🇭",
-    },
-    vi: {
-        translateCode: "vietnamese",
-        displayName: "Tiếng Việt",
-        locale: "vi-VN",
-        icon: "🇻🇳",
-    },
-    id: {
-        translateCode: "indonesian",
-        displayName: "Bahasa Indonesia",
-        locale: "id-ID",
-        icon: "🇮🇩",
     },
 } as const satisfies Record<string, LanguageConfig>;
 

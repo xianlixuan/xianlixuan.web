@@ -47,6 +47,8 @@ const linkPresetNameMap: Record<string, LinkPreset> = {
     Anime: LinkPreset.Anime,
     About: LinkPreset.About,
     Friends: LinkPreset.Friends,
+    HallOfFame: LinkPreset.HallOfFame,
+    Blog: LinkPreset.Blog,
 };
 
 const normalizeNavbarLink = (

@@ -3,9 +3,9 @@ site:
     # 站点 URL（以斜杠结尾）
     siteURL: "https://twilight.spr-aachen.com/"
     # 站点标题
-    title: "Twilight"
+    title: "Xianlixuan"
     # 站点副标题
-    subtitle: "Blog Template"
+    subtitle: "Phichit Sapnan (Wang) — Computer Science Student | Cybersecurity & Agentic Federation Developer"
     # 语言配置
     lang: "en"
     # 翻译配置
@@ -18,31 +18,56 @@ site:
         showSelectTag: false
         # 自动检测用户语言
         autoDiscriminate: true
-        # 翻译时忽略的 CSS 类名
+        # 翻译时忽略的 CSS 类名 (do-not-translate list)
         ignoreClasses:
             - "ignore"
+            - "notranslate"
             - "banner-title"
             - "banner-subtitle"
+            - "intro-name"
+            - "intro-terminal"
+            - "intro-terminal-bar"
+            - "intro-terminal-title"
+            - "intro-typewriter"
+            - "intro-prompt"
+            - "intro-chip"
+            - "navbar"
+            - "nav"
+            - "menu"
+            - "footer"
+            - "post-card"
+            - "post-title"
+            - "post-content"
+            - "prose"
+            - "copy-btn"
+            - "toc"
+            - "announcement"
         # 翻译时忽略的 HTML 标签
         ignoreTags:
             - "script"
             - "style"
             - "code"
             - "pre"
+            - "kbd"
+            - "samp"
+            - "var"
+            - "nav"
+            - "header"
+            - "footer"
+            - "button"
+            - "input"
+            - "textarea"
+            - "select"
+            - "option"
+            - "label"
     # 时区配置
     timeZone: 8
-    # 字体配置
-    font:
-        # 示例字体配置 - Zen Maru Gothic
-        "Example - ZenMaruGothic":
-            # 字体源 (字体 CSS 链接 | 字体文件路径)
-            src: "https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap"
-            # 字体名 (font-family)
-            family: "Zen Maru Gothic"
+    # 字体配置 (空 = 使用 main.css 中的 --font-sans / --font-mono)
+    font: {}
     # 主题色配置
     themeColor:
         # 主题色的默认色相 (范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345)
-        hue: 255
+        hue: 224
     # 默认主题 ("system" 跟随系统 | "light" 浅色 | "dark" 深色)
     defaultTheme: "dark"
     # 壁纸配置
@@ -53,19 +78,16 @@ site:
         src:
             # 桌面壁纸图片 (相对于 /public 目录; 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播)
             desktop:
-                - "/assets/images/desktopWallpaper_1.jpg"
-                - "/assets/images/desktopWallpaper_2.jpg"
-                - "/assets/images/desktopWallpaper_3.jpg"
+                - "/assets/images/cityscape-night-with-ocean-view.jpg"
             # 移动壁纸图片 (相对于 /public 目录; 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播)
             mobile:
-                - "/assets/images/mobileWallpaper_1.jpg"
-                - "/assets/images/mobileWallpaper_2.jpg"
+                - "/assets/images/cityscape-night-with-ocean-view.jpg"
         # 壁纸位置 ('top' | 'center' | 'bottom')
-        position: "center"
+        position: "top"
         # 轮播配置 (fullscreen 和 banner 模式共享)
         carousel:
             # 为多张图片启用轮播，否则随机显示一张图片
-            enable: true
+            enable: false
             # 轮播间隔时间 (秒)
             interval: 3.6
             # 启用 Ken Burns 效果
@@ -75,12 +97,11 @@ site:
             # 横幅文本配置
             homeText:
                 # 在主页显示文本
-                enable: true
+                enable: false
                 # 主标题
-                title: "Twilight"
+                title: "Xianlixuan.exe"
                 # 副标题，支持单个字符串或字符串数组
-                subtitle:
-                    - "Illuminate Our Paths"
+                subtitle: "Retro cyberpunk notes from the shoreline."
                 # 副标题打字机效果
                 typewriter:
                     # 启用副标题打字机效果
@@ -166,122 +187,56 @@ analytics:
 
 # 导航栏配置
 navbar:
-    # 链接配置 (链接预设位于 src/constants/link-presets.ts 的 LinkPresets)
     links:
-        - # 一级导航链接 - 主页 (预设)
-            "Home"
-        - # 一级导航链接 - 归档 (预设)
-            "Archive"
-        - # 一级导航链接 - 展览 (自定义)
-            # 导航名称
-            name: "Exhibition"
-            # 导航链接
-            url: "/exhibition/"
-            # 导航图标
-            icon: "material-symbols:person"
-            # 导航描述
-            description: "A collection of my creative works and experiences"
-            # 子链接
-            children:
-                - # 二级导航链接 - 项目 (预设)
-                    "Projects"
-                - # 二级导航链接 - 技能 (预设)
-                    "Skills"
-                - # 二级导航链接 - 历程 (预设)
-                    "Timeline"
-                - # 二级导航链接 - 日记 (预设)
-                    "Diary"
-                - # 二级导航链接 - 相册 (预设)
-                    "Albums"
-                - # 二级导航链接 - 动画 (预设)
-                    "Anime"
-        - # 一级导航链接 - 好友 (预设)
-            "Friends"
-        - # 一级导航链接 - 关于 (预设)
-            "About"
+        - "Home"
+        - "HallOfFame"
+        - "Blog"
+        - "Archive"
+        - "About"
 
 # 侧边栏配置
 sidebar:
-    # 侧边栏组件配置列表 (侧栏组件预设位于 src/types/config.ts 的 WidgetComponentType)
     components:
-        # 左侧侧边栏
         left:
-            - # 组件 - 目录 (预设)
-                # 类型
-                type: "directory"
-                # 位置策略 ("top" 顶部固定 | "sticky" 粘性)
-                position: "sticky"
-            - # 组件 - 文章类别 (预设)
-                # 类型
-                type: "categories"
-                # 位置策略 ("top" 顶部固定 | "sticky" 粘性)
-                position: "sticky"
-                # 响应式配置
-                responsive:
-                    # 折叠阈值
-                    collapseThreshold: 5
-                # 目录深度
-                depth: 3
-            - # 组件 - 文章标签 (预设)
-                # 类型
-                type: "tags"
-                # 位置策略 ("top" 顶部固定 | "sticky" 粘性)
-                position: "sticky"
-                # 响应式配置
-                responsive:
-                    # 折叠阈值
-                    collapseThreshold: 20
-        # 右侧侧边栏
+            - type: "profile"
+              position: "top"
+              visibility:
+                  mode: "exclude"
+                  paths: ["^/posts/", "^/archive"]
+            - type: "announcement"
+              position: "top"
+              visibility:
+                  mode: "exclude"
+                  paths: ["^/posts/", "^/archive"]
+            - type: "toc"
+              position: "sticky"
+              depth: 3
+            - type: "statistics"
+              position: "sticky"
+              visibility:
+                  mode: "include"
+                  paths: ["^/$", "^/archive/?$", "^/about/?$"]
         right:
-            - # 组件 - 资料 (预设)
-                # 类型
-                type: "profile"
-                # 位置策略 ("top" 顶部固定 | "sticky" 粘性)
-                position: "top"
-                # 页面可见性配置
-                visibility:
-                    # 匹配模式：'include' (包含), 'exclude' (排除)
-                    mode: "exclude"
-                    # 页面路径匹配规则列表 (支持正则字符串)
-                    paths: ["^/posts/", "^/archive"]
-            - # 组件 - 公告 (预设)
-                # 类型
-                type: "announcement"
-                # 位置策略 ("top" 顶部固定 | "sticky" 粘性)
-                position: "top"
-                # 页面可见性配置
-                visibility:
-                    # 匹配模式：'include' (包含), 'exclude' (排除)
-                    mode: "exclude"
-                    # 页面路径匹配规则列表 (支持正则字符串)
-                    paths: ["^/posts/", "^/archive"]
-            - # 组件 - 文章目录 (预设)
-                # 类型
-                type: "toc"
-                # 位置策略 ("top" 顶部固定 | "sticky" 粘性)
-                position: "sticky"
-                # 目录深度 (1-6，1 表示只显示 h1 标题，2 表示显示 h1 和 h2 标题，依此类推)
-                depth: 3
-            - # 组件 - 文章统计 (预设)
-                # 类型
-                type: "statistics"
-                # 位置策略 ("top" 顶部固定 | "sticky" 粘性)
-                position: "sticky"
-                # 页面可见性配置
-                visibility:
-                    # 匹配模式：'include' (包含), 'exclude' (排除)
-                    mode: "include"
-                    # 页面路径匹配规则列表 (支持正则字符串)
-                    paths: ["^/$", "^/archive$"]
+            - type: "directory"
+              position: "sticky"
+            - type: "categories"
+              position: "sticky"
+              responsive:
+                  collapseThreshold: 5
+              depth: 3
+            - type: "tags"
+              position: "sticky"
+              responsive:
+                  collapseThreshold: 20
 
 # 资料配置
 profile:
     # 头像配置 (相对于 /public 目录)
     avatar: "/assets/images/avatar.jpg"
     # 信息配置
-    name: "Twilight"
+    name: "Xianlixuan"
     # 简介配置
-    bio: "Hi"
+    bio: "Phichit Sapnan (Wang)\n\n\"Breaking things to understand them, then writing it all down.\"\n\nDedicated to exploring offensive security vulnerabilities and digital forensics while engineering next-generation multi-agent AI ecosystems."
     # 链接配置
     links:
         - # 链接示例
@@ -290,7 +245,16 @@ profile:
             # 图标
             icon: "fa6-brands:github"
             # 链接
-            url: "https://github.com/Spr-Aachen/Twilight"
+            url: "https://github.com/xianlixuan"
+        - name: "Facebook"
+          icon: "fa6-brands:facebook-f"
+          url: "https://www.facebook.com/profile.php?id=61577921184248"
+        - name: "LinkedIn"
+          icon: "fa6-brands:linkedin-in"
+          url: "https://www.linkedin.com/in/phichit-sapnan-12a704416?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+        - name: "Medium"
+          icon: "fa6-brands:medium"
+          url: "https://medium.com/@wanginfotechio"
 
 # 公告配置
 announcement:

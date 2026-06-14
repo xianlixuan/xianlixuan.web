@@ -1,7 +1,6 @@
 ---
 export const prerender = true;
 
-
 import { getEntry, render } from "astro:content";
 
 import { LinkPresets } from "@constants/link-presets";
@@ -11,25 +10,169 @@ import Comment from "@components/comment.astro";
 import GridLayout from "@layouts/grid.astro";
 import BackwardButton from "@components/backwardButton.astro";
 
-
 const aboutPost = await getEntry("spec", "about");
 if (!aboutPost) {
     throw new Error("About page content not found");
 }
+const aboutPostThai = await getEntry("spec", "about-th");
+if (!aboutPostThai) {
+    throw new Error("Thai about page content not found");
+}
 const pageTitle = aboutPost.data.title || LinkPresets[LinkPreset.About].name;
 const pageDescription = aboutPost.data.description || LinkPresets[LinkPreset.About].description;
 
-const { Content, headings } = await render(aboutPost);
+const { Content: EnglishContent, headings } = await render(aboutPost);
+const { Content: ThaiContent } = await render(aboutPostThai);
 ---
 
 <GridLayout title={pageTitle} description={pageDescription} headings={headings}>
     <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32 mb-4">
-        <div class="card-base z-10 px-9 py-6 relative w-full ">
+        <div class="card-base z-10 px-6 md:px-9 py-6 relative w-full">
             <BackwardButton currentPath={Astro.url.pathname} />
-            <Markdown class="mt-2">
-                <Content />
-            </Markdown>
+            <div id="about-language-root" class="mt-2">
+                <div data-about-lang="en" class="about-copy-block notranslate">
+                    <Markdown class="">
+                        <EnglishContent />
+                    </Markdown>
+                </div>
+                <div data-about-lang="th" class="about-copy-block about-copy-th notranslate hidden" lang="th">
+                    <Markdown class="">
+                        <ThaiContent />
+                    </Markdown>
+                </div>
+            </div>
         </div>
     </div>
     <Comment path="/about/" />
 </GridLayout>
+
+<style>
+    .about-copy-block.hidden {
+        display: none;
+    }
+
+    .about-copy-th :global(.custom-md) {
+        font-family: var(--font-thai);
+        font-size: 1.04rem;
+        line-height: 1.82;
+        letter-spacing: 0;
+    }
+
+    .about-copy-th :global(h1),
+    .about-copy-th :global(h2),
+    .about-copy-th :global(h3),
+    .about-copy-th :global(h4),
+    .about-copy-th :global(h5),
+    .about-copy-th :global(h6),
+    .about-copy-th :global(p),
+    .about-copy-th :global(li),
+    .about-copy-th :global(blockquote),
+    .about-copy-th :global(strong),
+    .about-copy-th :global(em) {
+        font-family: var(--font-thai);
+        font-style: normal;
+        letter-spacing: 0;
+    }
+
+    .about-copy-th :global(blockquote) {
+        font-size: 1.02rem;
+    }
+
+    @media (max-width: 640px) {
+        .about-copy-th :global(.custom-md) {
+            font-size: 0.99rem;
+            line-height: 1.72;
+        }
+    }
+</style>
+
+<script>
+    let aboutLanguageObserver;
+
+    function resolveAboutLanguage(languageCode) {
+        if (languageCode === 'thai' || languageCode === 'th') return 'th';
+        if (languageCode === 'english' || languageCode === 'en') return 'en';
+
+        const storedLanguage = localStorage.getItem('selected-language');
+        if (storedLanguage === 'thai' || storedLanguage === 'th') {
+            return 'th';
+        }
+        if (storedLanguage === 'english' || storedLanguage === 'en') {
+            return 'en';
+        }
+
+        const switchShell = document.querySelector('.lang-switch-shell');
+        const switchLanguage = switchShell?.getAttribute('data-active');
+        if (switchLanguage === 'th' || switchLanguage === 'en') {
+            return switchLanguage;
+        }
+
+        return 'en';
+    }
+
+    function updateAboutLanguageBlocks(languageCode) {
+        const activeLanguage = resolveAboutLanguage(languageCode);
+        const blocks = document.querySelectorAll('[data-about-lang]');
+
+        blocks.forEach((block) => {
+            const isActive = block.getAttribute('data-about-lang') === activeLanguage;
+            block.classList.toggle('hidden', !isActive);
+            block.setAttribute('aria-hidden', String(!isActive));
+
+            block.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
+                if (!heading.dataset.originalId) {
+                    heading.dataset.originalId = heading.id || '';
+                }
+
+                if (isActive) {
+                    const originalId = heading.dataset.originalId;
+                    if (originalId) {
+                        heading.id = originalId;
+                    }
+                } else {
+                    heading.removeAttribute('id');
+                }
+            });
+        });
+
+        window.dispatchEvent(new Event('content-decrypted'));
+    }
+
+    function bindAboutLanguageObserver() {
+        const switchShell = document.querySelector('.lang-switch-shell');
+        if (!switchShell) return;
+
+        aboutLanguageObserver?.disconnect();
+        aboutLanguageObserver = new MutationObserver(() => {
+            updateAboutLanguageBlocks();
+        });
+
+        aboutLanguageObserver.observe(switchShell, {
+            attributes: true,
+            attributeFilter: ['data-active'],
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            bindAboutLanguageObserver();
+            updateAboutLanguageBlocks();
+        });
+    } else {
+        bindAboutLanguageObserver();
+        updateAboutLanguageBlocks();
+    }
+
+    document.addEventListener('astro:after-swap', () => {
+        bindAboutLanguageObserver();
+        updateAboutLanguageBlocks();
+    });
+    document.addEventListener('astro:page-load', () => {
+        bindAboutLanguageObserver();
+        updateAboutLanguageBlocks();
+    });
+    window.addEventListener('twilight:language-changed', (event) => {
+        bindAboutLanguageObserver();
+        updateAboutLanguageBlocks(event.detail?.languageCode);
+    });
+</script>

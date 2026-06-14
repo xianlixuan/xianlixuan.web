@@ -29,12 +29,21 @@ html.banner-hiding #banner-wrapper {
 
 /* 标题样式 */
 .banner-title {
-    text-shadow: 0px 3px 12px rgba(0, 0, 0, 0.36), 0 0 24px color-mix(in srgb, var(--primary), transparent 48%);
-    font-weight: bold;
+    text-shadow:
+        0 0 12px rgba(138, 245, 255, 0.32),
+        0 0 30px rgba(164, 175, 255, 0.28),
+        0 8px 28px rgba(2, 4, 18, 0.68);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     opacity: 0;
 }
 .banner-subtitle {
-    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.36), 0 0 12px color-mix(in srgb, var(--primary), transparent 48%);
+    text-shadow:
+        0 0 10px rgba(138, 245, 255, 0.16),
+        0 4px 18px rgba(2, 4, 18, 0.6);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     opacity: 0;
 }
 /* 标题动画 */
@@ -58,6 +67,108 @@ body {
 }
 html.is-wallpaper-transitioning body {
     transition: background-color 0.6s ease, background-image 0.6s ease !important;
+}
+
+#banner-wrapper::before,
+#banner-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 12;
+}
+
+#banner-wrapper::before {
+    background:
+        linear-gradient(180deg, rgba(4, 8, 20, 0.1) 0%, rgba(5, 10, 26, 0.12) 14%, rgba(6, 12, 30, 0.3) 50%, rgba(3, 6, 16, 0.76) 100%),
+        linear-gradient(90deg, rgba(138, 245, 255, 0.05) 0%, transparent 22%, transparent 78%, rgba(255, 156, 122, 0.05) 100%),
+        radial-gradient(circle at 52% 34%, rgba(132, 160, 255, 0.18) 0%, transparent 30%);
+}
+
+#banner-wrapper::after {
+    opacity: 0.18;
+    mix-blend-mode: screen;
+    background-image:
+        linear-gradient(rgba(138, 245, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(138, 245, 255, 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.62), transparent 86%);
+}
+
+.banner-text-overlay {
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+.banner-text-overlay > div {
+    position: relative;
+    max-width: min(92vw, 980px);
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+    border: 1px solid rgba(164, 182, 255, 0.2);
+    border-radius: 28px;
+    background: linear-gradient(150deg, rgba(8, 17, 40, 0.44) 0%, rgba(9, 16, 35, 0.14) 100%);
+    box-shadow:
+        0 24px 72px rgba(1, 4, 17, 0.54),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 0 1px rgba(138, 245, 255, 0.05);
+    backdrop-filter: blur(18px) saturate(150%);
+    overflow: hidden;
+}
+
+.banner-text-overlay > div::before,
+.banner-text-overlay > div::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+.banner-text-overlay > div::before {
+    inset: 12px;
+    border: 1px solid rgba(138, 245, 255, 0.1);
+    border-radius: 20px;
+    opacity: 0.8;
+}
+
+.banner-text-overlay > div::after {
+    width: 180px;
+    height: 180px;
+    top: -60px;
+    right: -32px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 156, 122, 0.26) 0%, rgba(255, 156, 122, 0) 72%);
+    filter: blur(2px);
+}
+
+.banner-text-overlay .banner-title {
+    font-family: 'Press Start 2P', var(--font-mono), monospace;
+    font-size: clamp(1.6rem, 3.5vw, 4.2rem) !important;
+    line-height: 1.25 !important;
+    display: inline-block;
+    padding: 0.3rem 0;
+    background: linear-gradient(135deg, #ffffff 0%, #97f2ff 34%, #aeb8ff 64%, #ffd8a9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    position: relative;
+}
+
+.banner-text-overlay .banner-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.35rem;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(138, 245, 255, 0), rgba(138, 245, 255, 0.8) 28%, rgba(255, 213, 126, 0.85) 72%, rgba(255, 213, 126, 0));
+    box-shadow: 0 0 18px rgba(138, 245, 255, 0.32);
+}
+
+.banner-text-overlay .banner-subtitle {
+    font-family: var(--font-mono);
+    font-size: clamp(0.8rem, 1.15vw, 1.1rem) !important;
+    line-height: 1.7 !important;
+    color: rgba(236, 242, 255, 0.86) !important;
 }
 
 /**
@@ -463,4 +574,70 @@ html.is-wallpaper-transitioning body {
         /* 移动端SVG */
         min-height: 60px;
     }
+}
+
+/* Retro cyberpunk overrides */
+#header-waves {
+    color: #060711;
+}
+
+#header-waves .waves use {
+    filter: drop-shadow(0 -4px 12px rgba(121, 247, 255, 0.12));
+}
+
+@media (max-width: 1279px) and (prefers-color-scheme: dark) {
+    .banner-text-overlay {
+        background: linear-gradient(
+            to top,
+            rgba(3, 4, 12, 0.88) 0%,
+            rgba(4, 6, 17, 0.42) 50%,
+            transparent 100%
+        );
+    }
+}
+
+@media (max-width: 1279px) and (orientation: landscape) {
+    .banner-title {
+        font-size: 1.6rem !important;
+    }
+
+    .banner-subtitle {
+        font-size: 0.72rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .banner-title {
+        font-size: 3rem !important;
+    }
+
+    .banner-subtitle {
+        font-size: 0.92rem !important;
+    }
+}
+
+@media (min-width: 513px) and (max-width: 768px) {
+    .banner-title {
+        font-size: 2.1rem !important;
+    }
+
+    .banner-subtitle {
+        font-size: 0.84rem !important;
+    }
+}
+
+@media (max-width: 512px) {
+    .banner-title {
+        font-size: 1.55rem !important;
+    }
+
+    .banner-subtitle {
+        font-size: 0.72rem !important;
+    }
+}
+
+#banner img,
+#banner-mobile img,
+#banner-carousel img {
+    object-position: center top !important;
 }

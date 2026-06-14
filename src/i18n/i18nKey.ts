@@ -7,6 +7,10 @@ enum I18nKey {
     archive = "archive",
     about = "about",
     search = "search",
+    hallOfFame = "hallOfFame",
+    hallOfFameSubtitle = "hallOfFameSubtitle",
+    blog = "blog",
+    blogSubtitle = "blogSubtitle",
 
     // 文章
     directory = "directory",

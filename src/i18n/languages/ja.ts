@@ -11,6 +11,10 @@ export const ja: Translation = {
     [Key.archive]: "アーカイブ",
     [Key.about]: "について",
     [Key.search]: "検索",
+    [Key.hallOfFame]: "殿堂",
+    [Key.hallOfFameSubtitle]: "資格と実績のショーケース。",
+    [Key.blog]: "ブログ",
+    [Key.blogSubtitle]: "すべてのブログ記事をひとつの場所に。",
 
     // 投稿
     [Key.directory]: "ディレクトリ",

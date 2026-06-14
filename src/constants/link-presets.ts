@@ -64,4 +64,16 @@ export const LinkPresets: { [key in LinkPreset]: NavbarLink } = {
         icon: "material-symbols:info",
         description: i18n(I18nKey.about),
     },
+    [LinkPreset.HallOfFame]: {
+        name: i18n(I18nKey.hallOfFame),
+        url: "/hall-of-fame/",
+        icon: "material-symbols:trophy",
+        description: i18n(I18nKey.hallOfFameSubtitle),
+    },
+    [LinkPreset.Blog]: {
+        name: i18n(I18nKey.blog),
+        url: "/blog/",
+        icon: "material-symbols:rss-feed",
+        description: i18n(I18nKey.blogSubtitle),
+    },
 };

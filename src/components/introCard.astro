@@ -1,0 +1,374 @@
+---
+const promptLines = [
+    "breaking things to understand them",
+    "cyber security x agentic systems",
+    "pentester, builder, CTF player",
+];
+
+const thaiParagraphs = [
+    "\u0e1c\u0e21\u0e0a\u0e37\u0e48\u0e2d \u0e2b\u0e27\u0e31\u0e07 (Wang) \u0e40\u0e1b\u0e47\u0e19\u0e19\u0e31\u0e01\u0e28\u0e36\u0e01\u0e29\u0e32\u0e40\u0e17\u0e04\u0e42\u0e19\u0e42\u0e25\u0e22\u0e35\u0e2a\u0e32\u0e23\u0e2a\u0e19\u0e40\u0e17\u0e28\u0e41\u0e25\u0e30\u0e04\u0e27\u0e32\u0e21\u0e21\u0e31\u0e48\u0e19\u0e04\u0e07\u0e1b\u0e25\u0e2d\u0e14\u0e20\u0e31\u0e22\u0e17\u0e32\u0e07\u0e44\u0e0b\u0e40\u0e1a\u0e2d\u0e23\u0e4c\u0e08\u0e32\u0e01\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22 \u0e2a\u0e48\u0e27\u0e19\u0e43\u0e19\u0e42\u0e25\u0e01\u0e2d\u0e2d\u0e19\u0e44\u0e25\u0e19\u0e41\u0e25\u0e30\u0e43\u0e19\u0e2a\u0e32\u0e22\u0e07\u0e32\u0e19\u0e19\u0e35\u0e49 \u0e1c\u0e21\u0e43\u0e0a\u0e49\u0e09\u0e32\u0e22\u0e32\u0e27\u0e48\u0e32 Xianlixuan",
+    "\u0e1c\u0e21\u0e40\u0e1b\u0e47\u0e19\u0e04\u0e19\u0e04\u0e25\u0e31\u0e48\u0e07\u0e44\u0e04\u0e25\u0e49\u0e43\u0e19\u0e14\u0e49\u0e32\u0e19\u0e04\u0e27\u0e32\u0e21\u0e1b\u0e25\u0e2d\u0e14\u0e20\u0e31\u0e22\u0e41\u0e25\u0e30\u0e40\u0e1b\u0e47\u0e19\u0e1c\u0e39\u0e49\u0e40\u0e25\u0e48\u0e19 CTF \u0e15\u0e31\u0e27\u0e22\u0e07 \u0e1c\u0e21\u0e21\u0e2d\u0e07\u0e27\u0e48\u0e32\u0e17\u0e38\u0e01\u0e46 \u0e0a\u0e48\u0e2d\u0e07\u0e42\u0e2b\u0e27\u0e48 (Vulnerability) \u0e04\u0e37\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e17\u0e49\u0e32\u0e17\u0e32\u0e22\u0e17\u0e35\u0e48\u0e23\u0e2d\u0e43\u0e2b\u0e49\u0e40\u0e02\u0e49\u0e32\u0e44\u0e1b\u0e41\u0e01\u0e49\u0e44\u0e02",
+    "\u0e43\u0e19\u0e41\u0e15\u0e48\u0e25\u0e30\u0e27\u0e31\u0e19 \u0e1c\u0e21\u0e21\u0e31\u0e01\u0e08\u0e30\u0e0b\u0e38\u0e01\u0e2d\u0e22\u0e39\u0e48\u0e01\u0e31\u0e1a\u0e01\u0e32\u0e23\u0e40\u0e08\u0e32\u0e30\u0e25\u0e36\u0e01 Web Applications, \u0e27\u0e34\u0e40\u0e04\u0e23\u0e32\u0e30\u0e2b\u0e4c Session Configurations, \u0e40\u0e25\u0e48\u0e19 CTF \u0e41\u0e25\u0e30\u0e0a\u0e33\u0e41\u0e2b\u0e25\u0e30\u0e0a\u0e48\u0e2d\u0e07\u0e42\u0e2b\u0e27\u0e48\u0e02\u0e2d\u0e07\u0e23\u0e30\u0e1a\u0e1a\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e15\u0e32\u0e21\u0e2b\u0e32 Flag \u0e17\u0e35\u0e48\u0e0b\u0e48\u0e2d\u0e19\u0e2d\u0e22\u0e39\u0e48",
+    "\u0e40\u0e27\u0e47\u0e1a\u0e44\u0e0b\u0e15\u0e4c\u0e19\u0e35\u0e49\u0e04\u0e37\u0e2d\u0e1e\u0e2d\u0e23\u0e4c\u0e15\u0e42\u0e1f\u0e25\u0e34\u0e42\u0e2d\u0e02\u0e2d\u0e07\u0e1c\u0e21\u0e43\u0e19\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e17\u0e35\u0e48\u0e40\u0e1b\u0e47\u0e19\u0e01\u0e31\u0e19\u0e40\u0e2d\u0e07\u0e04\u0e23\u0e31\u0e1a \u0e40\u0e1b\u0e47\u0e19\u0e40\u0e2b\u0e21\u0e37\u0e2d\u0e19\u0e17\u0e31\u0e49\u0e07\u0e2b\u0e2d\u0e40\u0e01\u0e35\u0e22\u0e23\u0e15\u0e34\u0e22\u0e28 (Hall of Fame) \u0e17\u0e35\u0e48\u0e23\u0e27\u0e1a\u0e23\u0e27\u0e21\u0e42\u0e08\u0e17\u0e22\u0e4c\u0e41\u0e25\u0e30\u0e2d\u0e38\u0e1b\u0e2a\u0e23\u0e23\u0e04\u0e17\u0e35\u0e48\u0e1c\u0e21\u0e1e\u0e34\u0e0a\u0e34\u0e15\u0e21\u0e32\u0e44\u0e14\u0e49 \u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e1b\u0e23\u0e30\u0e27\u0e31\u0e15\u0e34\u0e01\u0e32\u0e23\u0e41\u0e02\u0e48\u0e07\u0e02\u0e31\u0e19 \u0e41\u0e25\u0e30\u0e40\u0e1b\u0e47\u0e19\u0e04\u0e25\u0e31\u0e07\u0e23\u0e27\u0e1a\u0e23\u0e27\u0e21\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e1b\u0e23\u0e30\u0e2a\u0e1a\u0e01\u0e32\u0e23\u0e13\u0e4c (Field notes) \u0e15\u0e25\u0e2d\u0e14\u0e40\u0e2a\u0e49\u0e19\u0e17\u0e32\u0e07\u0e2a\u0e32\u0e22 Cybersecurity \u0e02\u0e2d\u0e07\u0e1c\u0e21",
+];
+---
+
+<div class="intro-card z-10 relative w-full onload-animation-up mb-5 overflow-hidden">
+    <div class="intro-grid"></div>
+    <div class="intro-scanlines"></div>
+    <div class="intro-glow"></div>
+    <div class="intro-frame"></div>
+
+    <div class="relative px-5 py-6 md:px-8 md:py-9">
+        <h1 class="intro-name">Xianlixuan</h1>
+
+        <p class="intro-meta notranslate">
+            <span class="intro-realname">Phichit Sapnan "Wang"</span>
+            <span class="intro-meta-divider" aria-hidden="true"></span>
+            <span class="intro-role-line">Aspiring Penetration Tester · CTF Player · Cybersecurity Enthusiast</span>
+        </p>
+
+        <div class="intro-prompt-row font-mono">
+            <span class="intro-prompt">&gt;_</span>
+            <span class="intro-typewriter" data-lines={JSON.stringify(promptLines)}></span><span class="intro-caret" aria-hidden="true"></span>
+        </div>
+
+        <div class="intro-copy leading-relaxed space-y-4 text-[15px] md:text-base">
+            <div data-intro-lang="en" class="intro-copy-block notranslate">
+                <p>
+                    I'm <strong>Wang</strong>, an Information Technology and Cybersecurity student from Thailand.
+                    Online and around this field, I go by <strong class="intro-highlight">Xianlixuan</strong>.
+                </p>
+                <p>
+                    I'm deeply into security and serious about CTFs. To me, every <strong>vulnerability</strong> is a challenge worth understanding, breaking apart, and learning from.
+                </p>
+                <p>
+                    Most days I'm buried in web applications, session configurations, CTF puzzles, and vulnerability analysis, always chasing the next flag or the next lesson hidden inside a system.
+                </p>
+                <p>
+                    This site is the more personal side of my portfolio: part <strong>Hall of Fame</strong>, part competition archive, and part field-notes collection from the road I'm taking through cybersecurity.
+                </p>
+            </div>
+
+            <div data-intro-lang="th" class="intro-copy-block intro-copy-th notranslate hidden" lang="th">
+                {thaiParagraphs.map((paragraph) => (
+                    <p>{paragraph}</p>
+                ))}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .intro-card {
+        position: relative;
+        isolation: isolate;
+        width: min(100%, 60rem);
+        margin: 0 auto 1.25rem;
+        border-radius: var(--radius-large);
+        border: 1px solid rgba(177, 191, 255, 0.22);
+        background:
+            radial-gradient(circle at top left, rgba(129, 143, 255, 0.18), transparent 24%),
+            linear-gradient(180deg, rgba(18, 21, 48, 0.98) 0%, rgba(11, 14, 34, 0.97) 100%);
+        box-shadow:
+            0 26px 72px rgba(2, 6, 20, 0.48),
+            0 0 0 1px rgba(132, 148, 228, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(12px) saturate(118%);
+    }
+
+    .intro-grid,
+    .intro-frame,
+    .intro-scanlines,
+    .intro-glow {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+    }
+
+    .intro-grid {
+        background-image:
+            linear-gradient(rgba(167, 180, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(167, 180, 255, 0.05) 1px, transparent 1px);
+        background-size: 26px 26px;
+        opacity: 0.22;
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.72), transparent 94%);
+    }
+
+    .intro-frame {
+        inset: 10px;
+        border: 1px solid rgba(201, 211, 255, 0.06);
+        border-radius: calc(var(--radius-large) - 0.35rem);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 18%, transparent 82%, rgba(134, 152, 255, 0.03));
+    }
+
+    .intro-scanlines {
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.02) 0%,
+            rgba(255, 255, 255, 0.02) 50%,
+            transparent 50%,
+            transparent 100%
+        );
+        background-size: 100% 5px;
+        opacity: 0.08;
+        mix-blend-mode: screen;
+    }
+
+    .intro-glow {
+        background:
+            radial-gradient(circle at 18% 12%, rgba(214, 177, 255, 0.08) 0%, transparent 16%),
+            radial-gradient(circle at 82% 100%, rgba(71, 109, 255, 0.07) 0%, transparent 22%);
+    }
+
+    .intro-name {
+        font-family: 'Press Start 2P', var(--font-mono), monospace;
+        font-weight: 400;
+        font-size: clamp(1.55rem, 3vw, 2.7rem);
+        line-height: 1.12;
+        letter-spacing: 0.04em;
+        color: #e7ddff;
+        text-shadow:
+            0 0 10px rgba(227, 217, 255, 0.22),
+            0 0 22px rgba(164, 144, 255, 0.12);
+        text-wrap: balance;
+        margin: 0;
+    }
+
+    .intro-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.65rem;
+        margin: 0.95rem 0 0;
+        color: rgba(234, 238, 251, 0.9);
+        font-size: clamp(0.86rem, 1vw, 0.98rem);
+        line-height: 1.55;
+    }
+
+    .intro-realname {
+        font-weight: 700;
+        color: rgba(249, 250, 255, 0.98);
+    }
+
+    .intro-role-line {
+        color: rgba(223, 229, 247, 0.84);
+    }
+
+    .intro-meta-divider {
+        width: 4px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(167, 180, 255, 0.55);
+        box-shadow: 0 0 12px rgba(167, 180, 255, 0.18);
+    }
+
+    .intro-prompt-row {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-top: 1.1rem;
+        color: rgba(244, 247, 255, 0.96);
+        min-height: 1.6rem;
+    }
+
+    .intro-prompt {
+        color: #a696ff;
+        text-shadow: 0 0 12px rgba(166, 150, 255, 0.28);
+    }
+
+    .intro-typewriter {
+        white-space: pre;
+    }
+
+    .intro-caret {
+        display: inline-block;
+        width: 0.56rem;
+        height: 1.05em;
+        border-radius: 999px;
+        background: rgba(201, 184, 255, 0.88);
+        box-shadow: 0 0 12px rgba(201, 184, 255, 0.18);
+        animation: intro-caret-fade 1.45s ease-in-out infinite;
+    }
+
+    .intro-copy {
+        margin-top: 1.45rem;
+        max-width: 100%;
+        color: rgba(229, 234, 247, 0.9);
+    }
+
+    .intro-copy-block {
+        text-wrap: pretty;
+    }
+
+    .intro-copy-block.hidden {
+        display: none;
+    }
+
+    .intro-copy-block p {
+        margin: 0;
+    }
+
+    .intro-copy-block p + p {
+        margin-top: 1.15rem;
+    }
+
+    .intro-copy strong {
+        color: rgba(244, 247, 255, 0.96);
+        font-weight: 700;
+    }
+
+    .intro-highlight {
+        color: #ddd0ff;
+    }
+
+    .intro-copy-th {
+        font-family: var(--font-thai);
+        font-size: clamp(1rem, 1.03vw, 1.08rem);
+        line-height: 1.82;
+        letter-spacing: 0;
+        font-weight: 400;
+        color: rgba(244, 246, 252, 0.92);
+    }
+
+    .intro-copy-th,
+    .intro-copy-th p,
+    .intro-copy-th strong {
+        font-style: normal !important;
+    }
+
+    @keyframes intro-caret-fade {
+        0%, 44% {
+            opacity: 1;
+        }
+        60%, 100% {
+            opacity: 0.18;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .intro-card {
+            border-radius: 1.2rem;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .intro-name {
+            font-size: clamp(1.2rem, 6.6vw, 1.65rem);
+            line-height: 1.16;
+        }
+
+        .intro-meta {
+            gap: 0.45rem;
+            margin-top: 1rem;
+            font-size: 0.84rem;
+        }
+
+        .intro-meta-divider {
+            display: none;
+        }
+
+        .intro-realname,
+        .intro-role-line {
+            width: 100%;
+        }
+
+        .intro-prompt-row {
+            margin-top: 1.1rem;
+            font-size: 0.88rem;
+        }
+
+        .intro-copy {
+            margin-top: 1.6rem;
+        }
+
+        .intro-copy-th {
+            font-size: 0.98rem;
+            line-height: 1.66;
+        }
+    }
+</style>
+
+<script>
+    function initIntroTypewriter() {
+        const el = document.querySelector('.intro-typewriter');
+        if (!el) return;
+        if (el.dataset.tw === '1') return;
+        el.dataset.tw = '1';
+
+        let lines = [];
+        try {
+            lines = JSON.parse(el.getAttribute('data-lines') || '[]');
+        } catch (_) {}
+        if (!Array.isArray(lines) || lines.length === 0) return;
+
+        const typeSpeed = 72;
+        const deleteSpeed = 34;
+        const holdAfterType = 1800;
+        const holdAfterDelete = 320;
+
+        let lineIdx = 0;
+        let charIdx = 0;
+        let deleting = false;
+
+        function tick() {
+            const current = lines[lineIdx];
+            if (!deleting) {
+                charIdx++;
+                el.textContent = current.slice(0, charIdx);
+                if (charIdx >= current.length) {
+                    deleting = true;
+                    setTimeout(tick, holdAfterType);
+                    return;
+                }
+                setTimeout(tick, typeSpeed);
+            } else {
+                charIdx--;
+                el.textContent = current.slice(0, Math.max(0, charIdx));
+                if (charIdx <= 0) {
+                    deleting = false;
+                    lineIdx = (lineIdx + 1) % lines.length;
+                    setTimeout(tick, holdAfterDelete);
+                    return;
+                }
+                setTimeout(tick, deleteSpeed);
+            }
+        }
+
+        tick();
+    }
+
+    function resolveIntroLanguage() {
+        const storedLanguage = localStorage.getItem('selected-language');
+        if (storedLanguage === 'thai' || storedLanguage === 'th') {
+            return 'th';
+        }
+        if (storedLanguage === 'english' || storedLanguage === 'en') {
+            return 'en';
+        }
+        return 'en';
+    }
+
+    function updateIntroLanguageBlocks() {
+        const activeLanguage = resolveIntroLanguage();
+        document.querySelectorAll('[data-intro-lang]').forEach((block) => {
+            const targetLanguage = block.getAttribute('data-intro-lang');
+            block.classList.toggle('hidden', targetLanguage !== activeLanguage);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initIntroTypewriter();
+            updateIntroLanguageBlocks();
+        });
+    } else {
+        initIntroTypewriter();
+        updateIntroLanguageBlocks();
+    }
+
+    document.addEventListener('astro:after-swap', initIntroTypewriter);
+    document.addEventListener('astro:after-swap', updateIntroLanguageBlocks);
+    window.addEventListener('twilight:language-changed', updateIntroLanguageBlocks);
+</script>

@@ -2,77 +2,241 @@
 import { Icon } from "astro-icon/components";
 
 import { profileConfig } from "@/config";
-import { getAnalyticsConfig } from "@utils/analytics";
 import { url } from "@utils/url";
-import { i18n } from "@i18n/translation";
-import I18nKey from "@i18n/i18nKey";
 import ImageWrapper from "@/components/common/imageWrapper.astro";
 
 
-const { enabled: analyticsEnabled, platform, baseUrl, apiKey, websiteId } = getAnalyticsConfig();
+const realNameRaw = (profileConfig.bio || "").split(/\n\n+/)[0]?.trim() || "Phichit Sapnan (Wang)";
+const realName = realNameRaw.replace(/\(([^)]+)\)/g, "\"$1\"");
+const roleLineEn = "OSCP+ · CPTS · Penetration Tester · CTF Player";
+const quoteEn = "Breaking things to understand them, then writing it all down.";
+const locationEn = "Thailand";
+const aboutEn = "ABOUT ME";
+
+const findProfileLink = (name: string) =>
+    profileConfig.links?.find((item) => item.name.trim().toLowerCase() === name.toLowerCase());
+
+const facebookLink = findProfileLink("facebook");
+const linkedInLink = findProfileLink("linkedin");
+const githubLink = findProfileLink("github");
+const mediumLink = findProfileLink("medium");
+
+type SocialItem = {
+    name: string;
+    icon: string;
+    url?: string;
+    external?: boolean;
+};
+
+const socialLinks: SocialItem[] = [
+    { name: "Facebook", icon: facebookLink?.icon || "fa6-brands:facebook-f", url: facebookLink?.url, external: true },
+    { name: "LinkedIn", icon: linkedInLink?.icon || "fa6-brands:linkedin-in", url: linkedInLink?.url, external: true },
+    { name: "Medium", icon: mediumLink?.icon || "fa6-brands:medium", url: mediumLink?.url, external: true },
+    { name: "GitHub", icon: githubLink?.icon || "fa6-brands:github", url: githubLink?.url, external: true },
+    { name: "Portfolio", icon: "material-symbols:folder-copy-rounded", url: url("/about/"), external: false },
+];
 
 interface Props {
     class?: string;
     style?: string;
     side?: string;
 }
+
 const { class: className, style, side = "default" } = Astro.props;
 const id = `profile-${side}`;
 ---
 
-<div id={id} data-swup-persist={id} class:list={["card-base p-3", className]}>
-    <a aria-label="Go to About Page" href={url('/about/')}
-       class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
-       max-w-48 lg:max-w-none overflow-hidden rounded-xl active:scale-95">
-        <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
-        w-full h-full z-50 flex items-center justify-center">
-            <Icon name="fa6-regular:address-card"
-                  class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl">
-            </Icon>
+<div id={id} data-swup-persist={id} class:list={["card-base profile-card p-3 notranslate", className]} style={style} translate="no">
+    <a
+        aria-label="Go to About Page"
+        href={url("/about/")}
+        class="profile-avatar-wrap group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-4 max-w-48 lg:max-w-none overflow-hidden rounded-xl active:scale-95"
+    >
+        <div class="absolute transition pointer-events-none group-hover:bg-black/28 group-active:bg-black/45 w-full h-full z-10 flex items-center justify-center">
+            <Icon name="fa6-regular:address-card" class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-4xl"></Icon>
         </div>
         <ImageWrapper src={profileConfig.avatar || ""} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0" loading="eager"></ImageWrapper>
     </a>
-    <div class="px-2">
-        <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{profileConfig.name}</div>
-        <div class="h-1 w-5 bg-(--primary) mx-auto rounded-full mb-2 transition"></div>
-        <div class="text-center text-neutral-400 mb-2.5 transition">{profileConfig.bio}</div>
-        <div class="flex gap-2 justify-center mb-1">
-            {profileConfig.links.length > 1 && profileConfig.links.map(item =>
-                    <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
-                        <Icon name={item.icon} class="text-[1.5rem]"></Icon>
-                    </a>
-            )}
-            {profileConfig.links.length == 1 && <a rel="me" aria-label={profileConfig.links[0].name} href={profileConfig.links[0].url} target="_blank"
-                                            class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-                <Icon name={profileConfig.links[0].icon} class="text-[1.5rem]"></Icon>
-                {profileConfig.links[0].name}
-            </a>}
+
+    <div class="profile-content px-2">
+        <div class="profile-name">{profileConfig.name}</div>
+        <div class="profile-name-bar"></div>
+
+        <p class="profile-realname">{realName}</p>
+
+        <p class="profile-role">
+            {roleLineEn}
+        </p>
+
+        <p class="profile-quote">
+            {quoteEn}
+        </p>
+
+        <div class="profile-location">
+            <Icon name="fa6-solid:location-dot" class="profile-location-icon" />
+            <span>{locationEn}</span>
         </div>
-        {analyticsEnabled && (
-            <hr class="my-2 border-t border-dashed border-gray-300 dark:border-gray-700" />
-            <div class="text-sm text-gray-500 mt-2 text-center site-stats-container"
-                 data-analytics-base-url={baseUrl}
-                 data-analytics-api-key={apiKey}
-                 data-analytics-website-id={websiteId}
-                 data-i18n-views={i18n(I18nKey.pageViews)}
-                 data-i18n-visitors={i18n(I18nKey.visitors)}
-                 data-i18n-error={i18n(I18nKey.statsError)}
-            >
-                <Icon name="fa6-solid:eye" class="inline-block mr-1 text-gray-400 text-sm align-middle" />
-                <span class="site-stats-display">{i18n(I18nKey.statsLoading)}</span>
-            </div>
-        )}
+
+        <div class="profile-socials">
+            {socialLinks.map((item) => (
+                item.url ? (
+                    <a
+                        rel="me"
+                        aria-label={item.name}
+                        href={item.url}
+                        target={item.external ? "_blank" : undefined}
+                        class="profile-social-btn"
+                    >
+                        <Icon name={item.icon} class="text-[1.15rem]"></Icon>
+                    </a>
+                ) : (
+                    <span class="profile-social-btn is-disabled" aria-label={item.name}>
+                        <Icon name={item.icon} class="text-[1.15rem]"></Icon>
+                    </span>
+                )
+            ))}
+        </div>
+
+        <a href={url("/about/")} class="profile-about-link">
+            <Icon name="fa6-regular:address-card" class="text-[0.7rem]" />
+            <span>{aboutEn}</span>
+        </a>
+        <div class="profile-about-bar"></div>
     </div>
 </div>
 
-{analyticsEnabled && (
-    <script>
-        import { initAnalyticsStats } from "@utils/analytics";
-        import "@/plugins/umami-share";
+<style>
+    .profile-card {
+        border: 1px solid rgba(164, 182, 255, 0.18);
+        background:
+            linear-gradient(180deg, rgba(11, 19, 45, 0.96), rgba(7, 11, 28, 0.96));
+        box-shadow:
+            0 18px 42px rgba(1, 4, 17, 0.38),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
 
-        initAnalyticsStats(".site-stats-container", ".site-stats-display", "umami", false);
-        document.addEventListener('astro:page-load', () => {
-            initAnalyticsStats(".site-stats-container", ".site-stats-display", "umami", false);
-        });
-    </script>
-)}
+    .profile-content {
+        text-align: center;
+    }
+
+    .profile-name {
+        font-family: 'Press Start 2P', var(--font-mono), monospace;
+        font-size: clamp(0.86rem, 1.1vw, 1rem);
+        line-height: 1.4;
+        letter-spacing: 0.08em;
+        color: #ccd6ff;
+        text-shadow:
+            0 0 10px rgba(164, 182, 255, 0.28),
+            0 0 28px rgba(138, 245, 255, 0.1);
+    }
+
+    .profile-name-bar {
+        width: 2.9rem;
+        height: 2px;
+        margin: 0.8rem auto 0.9rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(138, 245, 255, 0.06), #8af5ff, rgba(138, 245, 255, 0.06));
+        box-shadow: 0 0 14px rgba(138, 245, 255, 0.22);
+    }
+
+    .profile-realname {
+        margin: 0;
+        color: rgba(244, 239, 255, 0.92);
+        font-size: 0.96rem;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .profile-role {
+        margin: 0.5rem 0 0;
+        color: rgba(219, 210, 248, 0.88);
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+
+    .profile-quote {
+        margin: 0.95rem auto 0;
+        max-width: 16rem;
+        color: rgba(232, 227, 247, 0.86);
+        font-size: 0.92rem;
+        line-height: 1.55;
+    }
+
+    .profile-location {
+        margin-top: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.42rem;
+        color: rgba(247, 243, 255, 0.92);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .profile-location-icon {
+        color: #ffb43c;
+        filter: drop-shadow(0 0 8px rgba(255, 180, 60, 0.25));
+    }
+
+    .profile-socials {
+        display: flex;
+        justify-content: center;
+        gap: 0.55rem;
+        margin-top: 1rem;
+    }
+
+    .profile-social-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.55rem;
+        height: 2.55rem;
+        border-radius: 0.82rem;
+        border: 1px solid rgba(164, 182, 255, 0.18);
+        background: linear-gradient(180deg, rgba(47, 73, 143, 0.62), rgba(20, 34, 74, 0.88));
+        color: rgba(245, 240, 255, 0.96);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 10px 24px rgba(8, 12, 32, 0.34),
+            0 0 16px rgba(164, 182, 255, 0.06);
+        transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .profile-social-btn:hover {
+        transform: translateY(-2px);
+        border-color: rgba(138, 245, 255, 0.24);
+        background: linear-gradient(180deg, rgba(60, 92, 173, 0.68), rgba(24, 42, 87, 0.92));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.06),
+            0 12px 26px rgba(8, 12, 32, 0.36),
+            0 0 18px rgba(138, 245, 255, 0.1);
+    }
+
+    .profile-social-btn.is-disabled {
+        cursor: default;
+        opacity: 0.92;
+    }
+
+    .profile-about-link {
+        margin-top: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.42rem;
+        width: 100%;
+        font-family: 'Press Start 2P', var(--font-mono), monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        color: #b9c8ff;
+        text-transform: uppercase;
+        text-shadow: 0 0 12px rgba(164, 182, 255, 0.16);
+    }
+
+    .profile-about-bar {
+        width: 100%;
+        height: 2px;
+        margin-top: 0.85rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(164, 182, 255, 0.1), rgba(138, 245, 255, 0.58), rgba(164, 182, 255, 0.1));
+        box-shadow: 0 0 12px rgba(138, 245, 255, 0.12);
+    }
+</style>

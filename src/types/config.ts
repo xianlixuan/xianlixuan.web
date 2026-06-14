@@ -228,6 +228,8 @@ export enum LinkPreset {
     Anime = 7,
     About = 8,
     Friends = 9,
+    HallOfFame = 10,
+    Blog = 11,
 }
 
 

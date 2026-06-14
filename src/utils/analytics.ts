@@ -46,7 +46,7 @@ export const generateStatsText = (
     i18nViews: string,
     i18nVisitors: string
 ): string => {
-    return `${i18nViews} ${pageViews} · ${i18nVisitors} ${visitors}`;
+    return `${i18nViews} ${pageViews} / ${i18nVisitors} ${visitors}`;
 };
 
 export const STATS_LOADING_KEY = "statsLoading";
@@ -68,7 +68,7 @@ const fetchUmamiStats = async (
 ): Promise<AnalyticsStats> => {
     const cleanBaseUrl = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
     const currentTimestamp = Date.now();
-    
+
     let statsUrl: string;
     if (urlPath) {
         statsUrl = `${cleanBaseUrl}/v1/websites/${websiteId}/stats?startAt=0&endAt=${currentTimestamp}&path=${encodeURIComponent(urlPath)}`;
@@ -122,13 +122,13 @@ export const initAnalyticsStats = (
 
         try {
             let stats: AnalyticsStats;
-            
+
             if (platform === "umami") {
                 stats = await fetchUmamiStats(baseUrl, apiKey, websiteId, pageUrl || undefined);
             } else {
                 throw new Error(`Unsupported analytics platform: ${platform}`);
             }
-            
+
             const displayElement = container.querySelector(displaySelector);
             if (displayElement) {
                 displayElement.textContent = generateStatsText(

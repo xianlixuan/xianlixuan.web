@@ -11,6 +11,10 @@ export const en: Translation = {
     [Key.archive]: "Archive",
     [Key.about]: "About",
     [Key.search]: "Search",
+    [Key.hallOfFame]: "Hall of Fame",
+    [Key.hallOfFameSubtitle]: "A showcase of certificates and achievements.",
+    [Key.blog]: "Blog",
+    [Key.blogSubtitle]: "All blog posts, in one place.",
 
     // Posts
     [Key.directory]: "Directory",
