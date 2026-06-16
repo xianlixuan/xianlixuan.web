@@ -127,7 +127,7 @@ export async function fetchMetingPlaylist(
             return {
                 id: song.id ?? `meting-${index}`,
                 title,
-                author,
+                artist: author,
                 cover,
                 url: song.url ?? "",
                 lrc: song.lrc ?? "",

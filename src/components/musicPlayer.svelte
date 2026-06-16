@@ -46,6 +46,7 @@ let currentIndex = $state(0);
 let audio: HTMLAudioElement | undefined = $state();
 let progressBar: HTMLElement | undefined = $state();
 let volumeBar: HTMLElement | undefined = $state();
+type DetailPanel = "playlist" | "lyrics";
 
 // 是否正在播放
 let isPlaying = $state(false);
@@ -54,7 +55,9 @@ let shouldPlay = $state(false);
 // 是否折叠播放器
 let isCollapsed = $state(true);
 // 是否显示播放列表
-let showPlaylist = $state(true);
+let activePanel: DetailPanel = $state("playlist");
+let showPlaylist = $derived(activePanel === "playlist");
+let showLyrics = $derived(activePanel === "lyrics");
 // 当前播放时间
 let currentTime = $state(0);
 // 歌曲总时长
@@ -331,7 +334,7 @@ async function fetchMetingPlaylist() {
 async function toggleMode() {
     if (!musicPlayerConfig.enable) return;
     mode = mode === "meting" ? "local" : "meting";
-    showPlaylist = false;
+    activePanel = "playlist";
     isLoading = false;
     isPlaying = false;
     currentIndex = 0;
@@ -381,19 +384,19 @@ function togglePlay() {
 }
 
 function toggleCollapse() {
-    isCollapsed = !isCollapsed;
+    const nextCollapsed = !isCollapsed;
+    isCollapsed = nextCollapsed;
+    if (!nextCollapsed) {
+        activePanel = "playlist";
+    }
 }
 
 function togglePlaylist() {
-    showPlaylist = true;
-    showLyrics = false;
+    activePanel = "playlist";
 }
 
-let showLyrics = $state(false);
-
 function toggleLyrics() {
-    showLyrics = true;
-    showPlaylist = false;
+    activePanel = activePanel === "lyrics" ? "playlist" : "lyrics";
 }
 
 function togglePlaybackMode() {
@@ -771,7 +774,7 @@ onDestroy(() => {
 <div class="music-player fixed bottom-4 right-4 z-101 transition-all duration-300 ease-in-out onload-animation-up flex flex-col items-end pointer-events-none"
      class:expanded={!isCollapsed}
      class:collapsed={isCollapsed}>
-    {#if showPlaylist}
+    {#if false}
         <div class="playlist-panel retro-flyout float-panel w-80 max-h-96 overflow-hidden z-50 mb-4 pointer-events-auto"
              transition:slide={{ duration: 300, axis: 'y' }}>
             <div class="playlist-header retro-flyout-header flex items-center justify-between p-4 border-b border-(--line-divider)">
@@ -1035,6 +1038,62 @@ onDestroy(() => {
                 <Icon icon="material-symbols:close" class="text-lg" />
             </button>
         </div>
+        {#if showPlaylist}
+        <div class="retro-detail-panel mt-4" transition:slide={{ duration: 260 }}>
+            <div class="retro-detail-header flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2 min-w-0">
+                    <span class="retro-heading retro-detail-title">{i18n(Key.playlist)}</span>
+                    <span class="retro-detail-count">{playlist.length}</span>
+                </div>
+                {#if mode === "meting"}
+                    <button class="btn-plain retro-chip-button w-8 h-8 rounded-lg flex items-center justify-center"
+                            onclick={fetchMetingPlaylist}
+                            disabled={isLoading}
+                            title={i18n(Key.musicRefresh)}>
+                        {#if isLoading}
+                            <Icon icon="eos-icons:loading" class="text-lg" />
+                        {:else}
+                            <Icon icon="material-symbols:refresh" class="text-lg" />
+                        {/if}
+                    </button>
+                {/if}
+            </div>
+            {#if playlist.length > 0}
+            <div class="playlist-content retro-queue-list overflow-y-auto max-h-72 mt-3">
+                {#each playlist as song, index}
+                    <button class="playlist-item retro-queue-item w-full flex items-center gap-3 p-3 text-left transition-colors"
+                            class:retro-queue-item-active={index === currentIndex}
+                            onclick={() => playSong(index)}
+                            title={`${song.title} - ${song.artist}`}>
+                        <div class="retro-queue-status w-7 h-7 shrink-0 flex items-center justify-center">
+                            {#if index === currentIndex && isPlaying}
+                                <Icon icon="material-symbols:graphic-eq" class="text-(--primary) animate-pulse" />
+                            {:else if index === currentIndex}
+                                <Icon icon="material-symbols:pause" class="text-(--primary)" />
+                            {:else}
+                                <span class="retro-track-number text-sm">{String(index + 1).padStart(2, "0")}</span>
+                            {/if}
+                        </div>
+                        <div class="retro-queue-thumb w-10 h-10 rounded-lg overflow-hidden shrink-0">
+                            <img src={getAssetPath(song.cover)} alt={song.title} class="w-full h-full object-cover" />
+                        </div>
+                        <div class="retro-track-meta flex-1 min-w-0">
+                            <div class="retro-track-title truncate">{song.title}</div>
+                            <div class="text-sm text-(--content-meta) truncate">{song.artist}</div>
+                        </div>
+                        <div class="retro-track-duration text-xs shrink-0">
+                            {formatTime(song.duration ?? 0)}
+                        </div>
+                    </button>
+                {/each}
+            </div>
+            {:else}
+            <div class="retro-empty-state mt-3">
+                {i18n(Key.musicNoSongsAvailable)}
+            </div>
+            {/if}
+        </div>
+        {/if}
     </div>
 </div>
 

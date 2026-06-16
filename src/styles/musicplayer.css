@@ -359,6 +359,94 @@
     padding-top: 0.25rem;
 }
 
+.retro-detail-panel {
+    border-top: 1px solid rgba(104, 78, 177, 0.28);
+    padding-top: 0.95rem;
+}
+
+.retro-detail-header {
+    align-items: center;
+}
+
+.retro-detail-title {
+    font-size: 0.66rem;
+    color: rgba(234, 226, 255, 0.94);
+}
+
+.retro-detail-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.7rem;
+    height: 1.35rem;
+    padding-inline: 0.45rem;
+    border: 1px solid rgba(112, 82, 194, 0.34);
+    border-radius: 999px;
+    background: rgba(22, 18, 38, 0.92);
+    color: rgba(218, 207, 255, 0.78);
+    font-size: 0.68rem;
+}
+
+.retro-queue-list {
+    border: 1px solid rgba(88, 65, 152, 0.34);
+    border-radius: 1rem;
+    background:
+        linear-gradient(180deg, rgba(12, 10, 24, 0.9) 0%, rgba(10, 9, 20, 0.95) 100%);
+    box-shadow: inset 0 0 0 1px rgba(199, 181, 255, 0.03);
+}
+
+.retro-queue-item {
+    align-items: center;
+    border-bottom: 1px solid rgba(82, 61, 138, 0.22);
+    background: transparent;
+}
+
+.retro-queue-item:last-child {
+    border-bottom: 0;
+}
+
+.retro-queue-item:hover,
+.retro-queue-item:focus-visible {
+    background: rgba(30, 24, 54, 0.96);
+    outline: none;
+}
+
+.retro-queue-item-active {
+    background:
+        linear-gradient(90deg, rgba(32, 64, 84, 0.92) 0%, rgba(28, 45, 64, 0.9) 100%);
+}
+
+.retro-queue-thumb {
+    border: 1px solid rgba(104, 78, 177, 0.35);
+    box-shadow: 0 6px 16px rgba(8, 7, 22, 0.26);
+}
+
+.retro-queue-status {
+    color: rgba(221, 211, 255, 0.72);
+}
+
+.retro-track-meta {
+    min-width: 0;
+}
+
+.retro-track-duration {
+    color: rgba(214, 204, 248, 0.62);
+    font-variant-numeric: tabular-nums;
+}
+
+.retro-empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5rem;
+    border: 1px dashed rgba(108, 79, 190, 0.34);
+    border-radius: 1rem;
+    color: rgba(214, 204, 248, 0.62);
+    background: rgba(14, 12, 28, 0.76);
+    text-align: center;
+    padding: 1rem;
+}
+
 .progress-section div:hover,
 .bottom-controls > div:hover {
     scale: 1 1.08;
