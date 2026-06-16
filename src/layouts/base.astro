@@ -493,6 +493,7 @@ import { initHue } from "@utils/hue";
 import { initMarkdownActions } from "@/utils/markdown";
 import { initFancybox, cleanupFancybox } from "@utils/fancybox";
 import { loadAndInitTranslate } from "@utils/language";
+import { initLocalizedContent, updateLocalizedContent } from "@utils/localizedContent";
 import { setupParticleEffects } from "@/utils/particle";
 
 
@@ -519,6 +520,8 @@ const setup = () => {
                 el.classList.add('pause-swup-transition');
             }
         });
+
+        updateLocalizedContent();
     })
     window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
         // Disable scroll protection when a link is clicked to prevent interference with page jump scrolling to top
@@ -681,6 +684,9 @@ initMarkdownActions();
 
 // Initialize translate.js
 loadAndInitTranslate();
+
+// Initialize custom localized content blocks
+initLocalizedContent();
 
 // Initialize particle effects
 setupParticleEffects();

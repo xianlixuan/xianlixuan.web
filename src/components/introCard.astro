@@ -339,36 +339,13 @@ const thaiParagraphs = [
         tick();
     }
 
-    function resolveIntroLanguage() {
-        const storedLanguage = localStorage.getItem('selected-language');
-        if (storedLanguage === 'thai' || storedLanguage === 'th') {
-            return 'th';
-        }
-        if (storedLanguage === 'english' || storedLanguage === 'en') {
-            return 'en';
-        }
-        return 'en';
-    }
-
-    function updateIntroLanguageBlocks() {
-        const activeLanguage = resolveIntroLanguage();
-        document.querySelectorAll('[data-intro-lang]').forEach((block) => {
-            const targetLanguage = block.getAttribute('data-intro-lang');
-            block.classList.toggle('hidden', targetLanguage !== activeLanguage);
-        });
-    }
-
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initIntroTypewriter();
-            updateIntroLanguageBlocks();
         });
     } else {
         initIntroTypewriter();
-        updateIntroLanguageBlocks();
     }
 
     document.addEventListener('astro:after-swap', initIntroTypewriter);
-    document.addEventListener('astro:after-swap', updateIntroLanguageBlocks);
-    window.addEventListener('twilight:language-changed', updateIntroLanguageBlocks);
 </script>
