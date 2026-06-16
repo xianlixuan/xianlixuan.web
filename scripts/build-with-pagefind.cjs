@@ -4,6 +4,28 @@ const { execSync } = require('child_process');
 const { existsSync } = require('fs');
 const { join } = require('path');
 
+function runIconGeneration() {
+    const iconScript = join(process.cwd(), 'scripts', 'generate-icons.js');
+    const iconCacheFile = join(process.cwd(), 'src', 'utils', 'icons.ts');
+
+    if (existsSync(iconScript)) {
+        console.log('Generating icon bundle...');
+        execSync('node scripts/generate-icons.js', {
+            stdio: 'inherit',
+            cwd: process.cwd(),
+        });
+        return;
+    }
+
+    if (existsSync(iconCacheFile)) {
+        console.warn('scripts/generate-icons.js not found. Using committed src/utils/icons.ts fallback.');
+        return;
+    }
+
+    console.error('Missing both scripts/generate-icons.js and src/utils/icons.ts.');
+    process.exit(1);
+}
+
 // Detect the platform
 function detectPlatform() {
     // Check environment variables
@@ -55,6 +77,8 @@ function main() {
     console.log(`📁 Pagefind output directory: ${outputDir}`);
 
     try {
+        runIconGeneration();
+
         // Run Astro build
         console.log('🔨 Running Astro build...');
         execSync(`npx astro build`.trim(), {

@@ -46,4 +46,4 @@ description: เกี่ยวกับผม
 - **Facebook** - [Phichit Sapnan](https://www.facebook.com/profile.php?id=61577921184248)
 - **LinkedIn** - [Phichit Sapnan](https://www.linkedin.com/in/phichit-sapnan-12a704416?utm_source=share_via&utm_content=profile&utm_medium=member_android)
 - **Medium** - [Xianlixuan](https://medium.com/@wanginfotechio)
-- ทักทายกันมาได้ตลอดเลยครับ ไม่ว่าจะเป็นการหาคนร่วมโปรเจกต์ (Collabs), หาทีมลงแข่ง CTF หรืออยากพูดคุยแลกเปลี่ยนเรื่อง AI กับ Cybersecurity!
+- ทักทายกันมาได้ตลอดเลยครับ ไม่ว่าจะเป็นการหาคนร่วมโปรเจกต์ (Collabs), หาทีมลงแข่ง CTF หรืออยากพูดคุยแลกเปลี่ยนเรื่อง AI กับ Cybersecurity !!
