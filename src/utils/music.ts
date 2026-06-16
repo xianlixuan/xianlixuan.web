@@ -10,6 +10,7 @@ export const STORAGE_KEYS = {
     REPEAT: "player_repeat",
     LAST_SONG_ID: "player_last_song_id",
     LAST_SONG_PROGRESS: "player_last_song_progress",
+    FAILED_SONGS_PREFIX: "player_failed_song_ids",
 };
 
 /**

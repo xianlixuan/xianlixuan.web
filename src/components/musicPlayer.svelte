@@ -88,6 +88,100 @@ let isUserScrolling = $state(false);
 let scrollTimeout: number | null = null;
 let noLyrics = $state(false); // Flag if no lyrics available
 
+function getTrackStorageId(song: MusicPlayerTrack): string {
+    if (song.id !== undefined && song.id !== null && String(song.id).length > 0) {
+        return `id:${String(song.id)}`;
+    }
+    if (song.url) {
+        return `url:${song.url}`;
+    }
+    return `meta:${song.title}:${song.artist}`;
+}
+
+function getFailedSongStorageKey(targetMode: "meting" | "local" = mode): string {
+    if (targetMode === "meting") {
+        return `${STORAGE_KEYS.FAILED_SONGS_PREFIX}:meting:${meting_server}:${meting_type}:${meting_id}`;
+    }
+    return `${STORAGE_KEYS.FAILED_SONGS_PREFIX}:local`;
+}
+
+function getFailedSongIds(targetMode: "meting" | "local" = mode): Set<string> {
+    if (typeof localStorage === "undefined") {
+        return new Set();
+    }
+
+    try {
+        const raw = localStorage.getItem(getFailedSongStorageKey(targetMode));
+        if (!raw) return new Set();
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return new Set();
+        return new Set(parsed.map((value) => String(value)));
+    } catch {
+        return new Set();
+    }
+}
+
+function setFailedSongIds(ids: Set<string>, targetMode: "meting" | "local" = mode) {
+    if (typeof localStorage === "undefined") return;
+    localStorage.setItem(
+        getFailedSongStorageKey(targetMode),
+        JSON.stringify(Array.from(ids)),
+    );
+}
+
+function markSongAsFailed(song: MusicPlayerTrack, targetMode: "meting" | "local" = mode) {
+    const failedIds = getFailedSongIds(targetMode);
+    failedIds.add(getTrackStorageId(song));
+    setFailedSongIds(failedIds, targetMode);
+}
+
+function filterPlayableSongs(
+    tracks: MusicPlayerTrack[],
+    targetMode: "meting" | "local" = mode,
+): MusicPlayerTrack[] {
+    const failedIds = getFailedSongIds(targetMode);
+
+    return tracks.filter((song) => {
+        if (!song?.url) return false;
+        return !failedIds.has(getTrackStorageId(song));
+    });
+}
+
+function removeCurrentSongFromPlaylist() {
+    const failedTrackId = getTrackStorageId(currentSong);
+    const failedIndex = playlist.findIndex((song) => getTrackStorageId(song) === failedTrackId);
+
+    markSongAsFailed(currentSong);
+
+    if (failedIndex === -1) {
+        return;
+    }
+
+    playlist = playlist.filter((_, index) => index !== failedIndex);
+
+    if (typeof localStorage !== "undefined") {
+        const lastId = localStorage.getItem(STORAGE_KEYS.LAST_SONG_ID);
+        if (lastId && String(currentSong.id) === lastId) {
+            localStorage.removeItem(STORAGE_KEYS.LAST_SONG_ID);
+            localStorage.setItem(STORAGE_KEYS.LAST_SONG_PROGRESS, "0");
+        }
+    }
+
+    if (playlist.length === 0) {
+        currentIndex = 0;
+        currentSong = {
+            ...currentSong,
+            url: "",
+            duration: 0,
+        };
+        shouldPlay = false;
+        isPlaying = false;
+        return;
+    }
+
+    currentIndex = Math.min(failedIndex, playlist.length - 1);
+}
+
 // Load lyrics function
 async function loadLyrics(song: MusicPlayerTrack) {
     lyrics = [];
@@ -212,17 +306,20 @@ async function fetchMetingPlaylist() {
     if (!meting_api || !meting_id) return;
     isLoading = true;
     try {
-        playlist = await fetchMetingPlaylistUtil(
+        const fetchedPlaylist = await fetchMetingPlaylistUtil(
             meting_api,
             meting_server,
             meting_type,
             meting_id
         );
+        playlist = filterPlayableSongs(fetchedPlaylist, "meting");
         if (playlist.length > 0) {
             // 使用 setTimeout 确保 Svelte 响应式变量已更新
             setTimeout(() => {
                 restoreLastSong();
             }, 0);
+        } else {
+            showErrorMessage(i18n(Key.musicNoSongsAvailable));
         }
         isLoading = false;
     } catch (e) {
@@ -248,7 +345,7 @@ async function toggleMode() {
     if (mode === "meting") {
         await fetchMetingPlaylist();
     } else {
-        playlist = [...(musicPlayerConfig.local?.playlist ?? [])];
+        playlist = filterPlayableSongs([...(musicPlayerConfig.local?.playlist ?? [])], "local");
         if (playlist.length > 0) {
             setTimeout(() => {
                 restoreLastSong();
@@ -385,6 +482,13 @@ function loadSong(song: MusicPlayerTrack) {
         audio.load();
     } else {
         isLoading = false;
+        removeCurrentSongFromPlaylist();
+        if (playlist.length > 0) {
+            const nextIndex = currentIndex;
+            setTimeout(() => playSong(nextIndex), 0);
+        } else {
+            showErrorMessage(i18n(Key.musicNoSongsAvailable));
+        }
     }
 }
 
@@ -442,8 +546,13 @@ function handleUserInteraction() {
 function handleLoadError(event: Event) {
     isLoading = false;
     showErrorMessage(i18n(Key.musicPlayFailed).replace("{0}", currentSong.title));
-    if (playlist.length > 1) setTimeout(() => nextSong(), 1000);
-    else showErrorMessage(i18n(Key.musicNoSongsAvailable));
+    removeCurrentSongFromPlaylist();
+    if (playlist.length > 0) {
+        const nextIndex = currentIndex;
+        setTimeout(() => playSong(nextIndex), 250);
+    } else {
+        showErrorMessage(i18n(Key.musicNoSongsAvailable));
+    }
 }
 
 function handleLoadStart() {}
@@ -614,7 +723,7 @@ onMount(() => {
         fetchMetingPlaylist();
     } else {
         // 使用本地播放列表，不发送任何API请求
-        playlist = [...(musicPlayerConfig.local?.playlist ?? [])];
+        playlist = filterPlayableSongs([...(musicPlayerConfig.local?.playlist ?? [])], "local");
         if (playlist.length > 0) {
             setTimeout(() => {
                 restoreLastSong();
