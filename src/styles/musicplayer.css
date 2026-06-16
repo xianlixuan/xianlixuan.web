@@ -8,6 +8,7 @@
         opacity: 0.5;
     }
 }
+
 .animate-pulse {
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -22,18 +23,27 @@
         opacity: 1;
     }
 }
+
 .animate-slide-up {
     animation: slide-up 0.3s ease-out;
 }
 
 @keyframes rotate {
-    from { rotate: 0deg; }
-    to { rotate: 360deg; }
+    from {
+        rotate: 0deg;
+    }
+    to {
+        rotate: 360deg;
+    }
 }
 
 @keyframes musicWave {
-    0%, 100% { scale: 1 0.5; }
-    50% { scale: 1 1; }
+    0%, 100% {
+        scale: 1 0.5;
+    }
+    50% {
+        scale: 1 1;
+    }
 }
 
 @keyframes spin-continuous {
@@ -44,109 +54,315 @@
         rotate: 360deg;
     }
 }
+
 .cover-container img {
     animation: spin-continuous 3s linear infinite;
     animation-play-state: paused;
 }
+
 .cover-container img.spinning {
     animation-play-state: running;
 }
 
-button.bg-\(--primary\) {
-    box-shadow: 0 0 0 2px var(--primary);
-    border: none;
-}
-
-.orb-player {
-    position: relative;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-.orb-player::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(45deg, var(--primary), transparent, var(--primary));
-    border-radius: 50%;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-.orb-player:hover::before {
-    opacity: 0.3;
-    animation: rotate 2s linear infinite;
-}
-.orb-player .animate-pulse {
-    animation: musicWave 1.5s ease-in-out infinite;
-}
-
 .music-player {
-    max-width: 320px;
+    max-width: 362px;
     user-select: none;
 }
+
+.music-player .orb-player {
+    position: relative;
+    width: 3.2rem;
+    height: 3.2rem;
+    border: 1px solid rgba(170, 138, 255, 0.45);
+    background:
+        radial-gradient(circle at 30% 30%, rgba(205, 183, 255, 0.35), transparent 42%),
+        linear-gradient(180deg, rgba(41, 28, 76, 0.96) 0%, rgba(21, 17, 40, 0.96) 100%);
+    box-shadow:
+        0 16px 30px rgba(5, 4, 18, 0.42),
+        inset 0 0 0 1px rgba(214, 196, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.music-player .orb-player::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(181, 146, 255, 0.55), transparent 35%, rgba(132, 99, 222, 0.4));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.25s ease;
+}
+
+.music-player .orb-player:hover::before {
+    opacity: 0.7;
+}
+
+.music-player .orb-player .animate-pulse {
+    animation: musicWave 1.35s ease-in-out infinite;
+}
+
 .expanded-player {
-    width: 320px;
+    width: 362px;
     position: absolute;
     bottom: 0;
     right: 0;
 }
+
 .music-player.expanded .expanded-player {
     position: relative;
 }
+
 .music-player.expanded .orb-player {
     position: absolute;
     bottom: 0;
     right: 0;
 }
-.progress-section div:hover,
-.bottom-controls > div:hover {
-    scale: 1 1.2;
-    transition: transform 0.2s ease;
-}
-/* Playlist Scrollbar Styles */
-.playlist-content {
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-    transition: scrollbar-color 0.3s ease;
-}
-.playlist-content:hover {
-    scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
-}
-.playlist-content::-webkit-scrollbar {
-    width: 4px;
-}
-.playlist-content::-webkit-scrollbar-track {
-    background: transparent;
-}
-.playlist-content::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-radius: 4px;
-}
-.playlist-content:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(155, 155, 155, 0.5);
+
+.retro-player {
+    border: 1px solid rgba(135, 99, 222, 0.42);
+    border-radius: 1.1rem;
+    background:
+        linear-gradient(180deg, rgba(18, 15, 35, 0.98) 0%, rgba(14, 12, 28, 0.98) 100%);
+    box-shadow:
+        0 22px 56px rgba(4, 4, 14, 0.5),
+        inset 0 0 0 1px rgba(183, 157, 255, 0.06),
+        0 0 0 1px rgba(113, 77, 188, 0.22);
+    overflow: hidden;
 }
 
-/* Lyrics Scrollbar Styles */
-.lyrics-container {
+.retro-player::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(210, 189, 255, 0.06), transparent 16%),
+        radial-gradient(circle at 18% 18%, rgba(156, 109, 255, 0.09), transparent 20%);
+    opacity: 0.95;
+}
+
+.retro-player-top {
+    position: relative;
+    align-items: center;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(121, 90, 205, 0.3);
+}
+
+.retro-cover {
+    width: 3.4rem;
+    height: 3.4rem;
+    border: 2px solid rgba(111, 82, 191, 0.55);
+    box-shadow:
+        0 0 0 2px rgba(32, 22, 58, 0.92),
+        0 8px 18px rgba(6, 5, 18, 0.34);
+}
+
+.retro-meta {
+    min-width: 0;
+}
+
+.retro-song-title,
+.retro-heading,
+.retro-play-label,
+.retro-track-number,
+.retro-track-title {
+    font-family: "Press Start 2P", var(--font-mono), monospace;
+    letter-spacing: 0.04em;
+}
+
+.retro-song-title {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #f0e9ff;
+    text-shadow: 0 0 12px rgba(195, 177, 255, 0.12);
+}
+
+.retro-song-artist,
+.retro-song-timing {
+    color: rgba(218, 207, 255, 0.7);
+}
+
+.retro-song-artist {
+    font-size: 0.84rem;
+}
+
+.retro-song-timing {
+    font-size: 0.72rem;
+}
+
+.retro-top-actions {
+    align-self: flex-start;
+}
+
+.retro-chip-button {
+    border: 1px solid rgba(124, 92, 211, 0.4);
+    background:
+        linear-gradient(180deg, rgba(32, 24, 58, 0.98) 0%, rgba(20, 16, 38, 0.98) 100%);
+    color: rgba(224, 214, 255, 0.86);
+    box-shadow:
+        inset 0 0 0 1px rgba(207, 190, 255, 0.04),
+        0 8px 18px rgba(6, 5, 18, 0.26);
+}
+
+.retro-chip-button:hover {
+    color: #f4eeff;
+    border-color: rgba(170, 138, 255, 0.55);
+}
+
+.retro-progress-section {
+    margin-bottom: 0.9rem;
+}
+
+.retro-progress-bar,
+.retro-volume-bar {
+    position: relative;
+    height: 0.5rem;
+    border: 1px solid rgba(90, 67, 156, 0.52);
+    background: rgba(8, 8, 18, 0.95);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+
+.retro-progress-fill,
+.retro-volume-fill {
+    background:
+        linear-gradient(90deg, rgba(177, 150, 255, 0.86), rgba(154, 124, 244, 0.98));
+    box-shadow:
+        0 0 12px rgba(168, 133, 255, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.retro-controls {
+    gap: 0.5rem;
+    margin-bottom: 0.95rem;
+}
+
+.retro-mini-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    border: 1px solid rgba(109, 80, 194, 0.5);
+    border-radius: 0.72rem;
+    background:
+        linear-gradient(180deg, rgba(31, 24, 56, 0.98) 0%, rgba(18, 15, 34, 0.98) 100%);
+    color: rgba(223, 211, 255, 0.88);
+    box-shadow:
+        inset 0 0 0 1px rgba(207, 190, 255, 0.04),
+        0 8px 18px rgba(8, 7, 22, 0.25);
+}
+
+.retro-mini-button:hover {
+    color: #f6f1ff;
+    border-color: rgba(176, 147, 255, 0.58);
+}
+
+.retro-play-button {
+    min-width: 11.8rem;
+    height: 2.9rem;
+    border: 2px solid rgba(177, 151, 255, 0.9);
+    border-radius: 0.82rem;
+    background:
+        linear-gradient(180deg, rgba(188, 166, 255, 0.96) 0%, rgba(149, 118, 235, 0.98) 100%);
+    color: #fbf8ff;
+    box-shadow:
+        inset 0 0 0 2px rgba(73, 49, 126, 0.58),
+        0 12px 24px rgba(20, 11, 40, 0.34);
+}
+
+.retro-play-button:hover {
+    filter: brightness(1.04);
+}
+
+.retro-play-label {
+    font-size: 0.88rem;
+}
+
+.playlist-panel {
+    border: 1px solid rgba(107, 78, 191, 0.38);
+}
+
+.retro-flyout {
+    border-radius: 1rem;
+    background:
+        linear-gradient(180deg, rgba(18, 14, 34, 0.98) 0%, rgba(13, 11, 26, 0.98) 100%);
+    box-shadow:
+        0 18px 40px rgba(4, 4, 14, 0.46),
+        inset 0 0 0 1px rgba(192, 172, 255, 0.04);
+}
+
+.retro-flyout-header {
+    border-bottom-color: rgba(112, 82, 194, 0.34);
+}
+
+.retro-heading {
+    font-size: 0.68rem;
+    color: rgba(234, 226, 255, 0.92);
+}
+
+.retro-flyout-item {
+    border-bottom: 1px solid rgba(80, 61, 138, 0.22);
+}
+
+.retro-flyout-thumb {
+    border: 1px solid rgba(104, 78, 177, 0.35);
+}
+
+.playlist-content {
     scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-    transition: scrollbar-color 0.3s ease;
+    scrollbar-color: rgba(125, 93, 211, 0.65) transparent;
 }
-.lyrics-container:hover, .lyrics-container.scrolling {
-    scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
-}
+
+.playlist-content::-webkit-scrollbar,
 .lyrics-container::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
 }
+
+.playlist-content::-webkit-scrollbar-track,
 .lyrics-container::-webkit-scrollbar-track {
     background: transparent;
 }
+
+.playlist-content::-webkit-scrollbar-thumb,
 .lyrics-container::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-radius: 4px;
+    border-radius: 999px;
+    background: rgba(126, 96, 211, 0.58);
 }
-.lyrics-container:hover::-webkit-scrollbar-thumb, .lyrics-container.scrolling::-webkit-scrollbar-thumb {
-    background-color: rgba(155, 155, 155, 0.5);
+
+.retro-lyrics-section {
+    border-top: 1px solid rgba(98, 73, 171, 0.26);
+    border-bottom: 1px solid rgba(98, 73, 171, 0.26);
+    padding-top: 0.5rem;
+    padding-bottom: 0.35rem;
+}
+
+.retro-lyrics-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(125, 93, 211, 0.65) transparent;
+}
+
+.retro-lyric-line {
+    color: rgba(210, 200, 240, 0.62);
+}
+
+.retro-lyric-line.retro-lyric-line-active,
+.retro-lyric-line.text-\(--primary\) {
+    color: #b79eff;
+    text-shadow: 0 0 10px rgba(183, 158, 255, 0.18);
+}
+
+.retro-bottom-controls {
+    align-items: center;
+    gap: 0.7rem;
+    padding-top: 0.25rem;
+}
+
+.progress-section div:hover,
+.bottom-controls > div:hover {
+    scale: 1 1.08;
+    transition: transform 0.2s ease;
 }
 
 @media (hover: none) and (pointer: coarse) {
@@ -154,6 +370,7 @@ button.bg-\(--primary\) {
     .playlist-item {
         min-height: 44px;
     }
+
     .progress-section > div,
     .bottom-controls > div:nth-child(2) {
         height: 12px;
@@ -162,35 +379,31 @@ button.bg-\(--primary\) {
 
 @media (max-width: 768px) {
     .music-player {
-        max-width: 280px;
-        /*left: 8px !important;*/
+        max-width: 320px;
         bottom: 8px !important;
         right: 8px !important;
     }
+
     .music-player.expanded {
         width: calc(100vw - 16px);
-        max-width: 320px;
-        /*left: 8px !important;*/
+        max-width: 362px;
         right: 8px !important;
     }
+
     .expanded-player {
-        width: min(calc(100vw - 16px), 320px) !important;
+        width: min(calc(100vw - 16px), 362px) !important;
     }
+
     .playlist-panel {
         width: min(calc(100vw - 16px), 320px) !important;
-        /*left: 8px !important;*/
-        /*right: 8px !important;*/
         max-width: none;
     }
-    .controls {
-        gap: 8px;
+
+    .retro-play-button {
+        min-width: 9.6rem;
     }
-    .controls button {
-        width: 36px;
-        height: 36px;
-    }
-    .controls button:nth-child(3) {
-        width: 44px;
-        height: 44px;
+
+    .retro-song-title {
+        font-size: 0.74rem;
     }
 }

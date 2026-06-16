@@ -54,7 +54,7 @@ let shouldPlay = $state(false);
 // 是否折叠播放器
 let isCollapsed = $state(true);
 // 是否显示播放列表
-let showPlaylist = $state(false);
+let showPlaylist = $state(true);
 // 当前播放时间
 let currentTime = $state(0);
 // 歌曲总时长
@@ -382,19 +382,18 @@ function togglePlay() {
 
 function toggleCollapse() {
     isCollapsed = !isCollapsed;
-    if (isCollapsed) {
-        showPlaylist = false;
-    }
 }
 
 function togglePlaylist() {
-    showPlaylist = !showPlaylist;
+    showPlaylist = true;
+    showLyrics = false;
 }
 
-let showLyrics = $state(true);
+let showLyrics = $state(false);
 
 function toggleLyrics() {
-    showLyrics = !showLyrics;
+    showLyrics = true;
+    showPlaylist = false;
 }
 
 function togglePlaybackMode() {
@@ -773,10 +772,10 @@ onDestroy(() => {
      class:expanded={!isCollapsed}
      class:collapsed={isCollapsed}>
     {#if showPlaylist}
-        <div class="playlist-panel float-panel w-80 max-h-96 overflow-hidden z-50 mb-4 pointer-events-auto"
+        <div class="playlist-panel retro-flyout float-panel w-80 max-h-96 overflow-hidden z-50 mb-4 pointer-events-auto"
              transition:slide={{ duration: 300, axis: 'y' }}>
-            <div class="playlist-header flex items-center justify-between p-4 border-b border-(--line-divider)">
-                <h3 class="text-lg font-semibold text-90">{i18n(Key.playlist)}</h3>
+            <div class="playlist-header retro-flyout-header flex items-center justify-between p-4 border-b border-(--line-divider)">
+                <h3 class="text-lg font-semibold text-90 retro-heading">{i18n(Key.playlist)}</h3>
                 <div class="flex items-center gap-1">
                     {#if mode === "meting"}
                         <button class="btn-plain w-8 h-8 rounded-lg flex items-center justify-center"
@@ -797,7 +796,7 @@ onDestroy(() => {
             </div>
             <div class="playlist-content overflow-y-auto max-h-80">
                 {#each playlist as song, index}
-                    <div class="playlist-item flex items-center gap-3 p-3 hover:bg-(--btn-plain-bg-hover) cursor-pointer transition-colors"
+                    <div class="playlist-item retro-flyout-item flex items-center gap-3 p-3 hover:bg-(--btn-plain-bg-hover) cursor-pointer transition-colors"
                         class:bg-(--btn-plain-bg)={index === currentIndex}
                         class:text-(--primary)={index === currentIndex}
                         onclick={() => playSong(index)}
@@ -820,7 +819,7 @@ onDestroy(() => {
                             {/if}
                         </div>
                         <!-- 歌单列表内封面仍为圆角矩形 -->
-                        <div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-sm">
+                        <div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-sm retro-flyout-thumb">
                             <img src={getAssetPath(song.cover)} alt={song.title} class="w-full h-full object-cover" />
                         </div>
                         <div class="flex-1 min-w-0">
@@ -865,32 +864,32 @@ onDestroy(() => {
         {/if}
     </div>
     <!-- 展开状态的完整播放器（封面圆形） -->
-    <div class="expanded-player card-base bg-(--float-panel-bg) shadow-xl rounded-2xl p-4 transition-all duration-500 ease-in-out"
+    <div class="expanded-player retro-player card-base bg-(--float-panel-bg) shadow-xl rounded-2xl p-4 transition-all duration-500 ease-in-out"
          class:opacity-0={isCollapsed}
          class:scale-95={isCollapsed}
          class:pointer-events-auto={!isCollapsed}
          class:pointer-events-none={isCollapsed}>
-        <div class="flex items-center gap-4 mb-4">
-            <div class="cover-container relative w-16 h-16 rounded-full overflow-hidden shrink-0">
+        <div class="retro-player-top flex items-center gap-4 mb-4">
+            <div class="cover-container retro-cover relative w-16 h-16 rounded-full overflow-hidden shrink-0">
                 <img src={getAssetPath(currentSong.cover)} alt="封面"
                      class="w-full h-full object-cover transition-transform duration-300"
                      class:spinning={isPlaying && !isLoading}
                      class:animate-pulse={isLoading} />
             </div>
-            <div class="flex-1 min-w-0">
-                <div class="song-title text-lg font-bold text-90 truncate mb-1">{currentSong.title}</div>
-                <div class="song-artist text-sm text-50 truncate">{currentSong.artist}</div>
-                <div class="text-xs text-30 mt-1">
+            <div class="retro-meta flex-1 min-w-0">
+                <div class="song-title retro-song-title text-lg font-bold text-90 truncate mb-1">{currentSong.title}</div>
+                <div class="song-artist retro-song-artist text-sm text-50 truncate">{currentSong.artist}</div>
+                <div class="retro-song-timing text-xs text-30 mt-1">
                     {formatTime(currentTime)} / {formatTime(duration)}
                 </div>
             </div>
-            <div class="flex items-center gap-1">
-                <button class="btn-plain w-8 h-8 rounded-lg flex items-center justify-center"
+            <div class="retro-top-actions flex items-center gap-1">
+                <button class="btn-plain retro-chip-button w-8 h-8 rounded-lg flex items-center justify-center"
                         onclick={toggleMode}
                         title={mode === "meting" ? i18n(Key.musicSwitchToLocal) : i18n(Key.musicSwitchToMeting)}>
                     <Icon icon={mode === "meting" ? "material-symbols:cloud" : "material-symbols:folder"} class="text-lg" />
                 </button>
-                <button class="btn-plain w-8 h-8 rounded-lg flex items-center justify-center"
+                <button class="btn-plain retro-chip-button w-8 h-8 rounded-lg flex items-center justify-center"
                         class:text-(--primary)={showPlaylist}
                         onclick={togglePlaylist}
                         title={i18n(Key.playlist)}>
@@ -899,8 +898,8 @@ onDestroy(() => {
             </div>
         </div>
         {#if showLyrics}
-        <div class="lyrics-section mb-2 px-1" transition:slide={{ duration: 300 }}>
-            <div class="lyrics-container h-[88px] overflow-y-auto overflow-x-hidden relative text-center scroll-smooth"
+        <div class="lyrics-section retro-lyrics-section mb-2 px-1" transition:slide={{ duration: 300 }}>
+            <div class="lyrics-container retro-lyrics-container h-[88px] overflow-y-auto overflow-x-hidden relative text-center scroll-smooth"
                  bind:this={lrcContainer}
                  onscroll={handleLrcScroll}>
                 {#if noLyrics}
@@ -930,8 +929,8 @@ onDestroy(() => {
             </div>
         </div>
         {/if}
-        <div class="progress-section mb-4">
-            <div class="progress-bar flex-1 h-2 bg-(--btn-regular-bg) rounded-full cursor-pointer"
+        <div class="progress-section retro-progress-section mb-4">
+            <div class="progress-bar retro-progress-bar flex-1 h-2 bg-(--btn-regular-bg) rounded-full cursor-pointer"
                 bind:this={progressBar}
                 onclick={setProgress}
                 onkeydown={(e) => {
@@ -954,14 +953,14 @@ onDestroy(() => {
                 aria-valuemin="0"
                 aria-valuemax="100"
                 aria-valuenow={duration > 0 ? (currentTime / duration * 100) : 0}>
-                <div class="h-full bg-(--primary) rounded-full transition-all duration-100"
+                <div class="retro-progress-fill h-full bg-(--primary) rounded-full transition-all duration-100"
                     style="width: {duration > 0 ? (currentTime / duration) * 100 : 0}%">
                 </div>
             </div>
         </div>
-        <div class="controls flex items-center justify-center gap-2 mb-4">
+        <div class="controls retro-controls flex items-center justify-center gap-2 mb-4">
             <!-- 播放模式切换按钮 -->
-            <button class="w-10 h-10 rounded-lg btn-plain"
+            <button class="w-10 h-10 rounded-lg btn-plain retro-mini-button"
                     onclick={togglePlaybackMode}
                     title={isRepeating === 1 ? i18n(Key.musicRepeatOne) : (isShuffled ? i18n(Key.musicShuffle) : i18n(Key.musicRepeatAll))}>
                 {#if isRepeating === 1}
@@ -972,35 +971,35 @@ onDestroy(() => {
                     <Icon icon="material-symbols:repeat" class="text-lg" />
                 {/if}
             </button>
-            <button class="btn-plain w-10 h-10 rounded-lg" onclick={previousSong}
+            <button class="btn-plain retro-mini-button w-10 h-10 rounded-lg" onclick={previousSong}
                     disabled={playlist.length <= 1}>
                 <Icon icon="material-symbols:skip-previous" class="text-xl" />
             </button>
-            <button class="btn-regular w-12 h-12 rounded-full"
+            <button class="btn-regular retro-play-button w-12 h-12 rounded-full"
                     class:opacity-50={isLoading}
                     disabled={isLoading}
                     onclick={togglePlay}>
                 {#if isLoading}
                     <Icon icon="eos-icons:loading" class="text-xl" />
                 {:else if isPlaying}
-                    <Icon icon="material-symbols:pause" class="text-xl" />
+                    <span class="retro-play-label">PAUSE</span>
                 {:else}
-                    <Icon icon="material-symbols:play-arrow" class="text-xl" />
+                    <span class="retro-play-label">PLAY</span>
                 {/if}
             </button>
-            <button class="btn-plain w-10 h-10 rounded-lg" onclick={nextSong}
+            <button class="btn-plain retro-mini-button w-10 h-10 rounded-lg" onclick={nextSong}
                     disabled={playlist.length <= 1}>
                 <Icon icon="material-symbols:skip-next" class="text-xl" />
             </button>
             <!-- 歌词显示切换按钮 -->
-            <button class="w-10 h-10 rounded-lg btn-plain"
+            <button class="w-10 h-10 rounded-lg btn-plain retro-mini-button"
                     onclick={toggleLyrics}
                     title="切换歌词显示">
                 <Icon icon="material-symbols:lyrics" class="text-lg {showLyrics ? 'text-(--primary)' : 'opacity-90'}" />
             </button>
         </div>
-        <div class="bottom-controls flex items-center gap-2">
-            <button class="btn-plain w-8 h-8 rounded-lg" onclick={toggleMute}>
+        <div class="bottom-controls retro-bottom-controls flex items-center gap-2">
+            <button class="btn-plain retro-chip-button w-8 h-8 rounded-lg" onclick={toggleMute}>
                 {#if isMuted || volume === 0}
                     <Icon icon="material-symbols:volume-off" class="text-lg" />
                 {:else if volume < 0.5}
@@ -1009,7 +1008,7 @@ onDestroy(() => {
                     <Icon icon="material-symbols:volume-up" class="text-lg" />
                 {/if}
             </button>
-            <div class="flex-1 h-2 bg-(--btn-regular-bg) rounded-full cursor-pointer"
+            <div class="retro-volume-bar flex-1 h-2 bg-(--btn-regular-bg) rounded-full cursor-pointer"
                 bind:this={volumeBar}
                 onmousedown={startVolumeDrag}
                 onkeydown={(e) => {
@@ -1024,16 +1023,16 @@ onDestroy(() => {
                 aria-valuemin="0"
                 aria-valuemax="100"
                 aria-valuenow={volume * 100}>
-                <div class="h-full bg-(--primary) rounded-full transition-all"
+                <div class="retro-volume-fill h-full bg-(--primary) rounded-full transition-all"
                     class:duration-100={!isVolumeDragging}
                     class:duration-0={isVolumeDragging}
                     style="width: {volume * 100}%">
                 </div>
             </div>
-            <button class="btn-plain w-8 h-8 rounded-lg flex items-center justify-center"
+            <button class="btn-plain retro-chip-button w-8 h-8 rounded-lg flex items-center justify-center"
                     onclick={toggleCollapse}
                     title={i18n(Key.musicCollapse)}>
-                <Icon icon="material-symbols:expand-more" class="text-lg" />
+                <Icon icon="material-symbols:close" class="text-lg" />
             </button>
         </div>
     </div>
