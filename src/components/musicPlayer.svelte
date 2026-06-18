@@ -850,20 +850,18 @@ onDestroy(() => {
                 e.preventDefault();
                 toggleCollapse();
             }
-         }}
+        }}
          role="button"
          tabindex="0"
          aria-label={i18n(Key.musicExpand)}>
+        <div class="orb-record" class:spinning={isPlaying && !isLoading}>
+            <img src={getAssetPath(currentSong.cover)} alt={currentSong.title} class="orb-record-art" />
+            <span class="orb-record-hole"></span>
+        </div>
         {#if isLoading}
-            <Icon icon="eos-icons:loading" class="text-white text-lg" />
-        {:else if isPlaying}
-            <div class="flex space-x-0.5">
-                <div class="w-0.5 h-3 bg-white rounded-full animate-pulse"></div>
-                <div class="w-0.5 h-4 bg-white rounded-full animate-pulse" style="animation-delay: 150ms;"></div>
-                <div class="w-0.5 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 300ms;"></div>
-            </div>
-        {:else}
-            <Icon icon="material-symbols:music-note" class="text-white text-lg" />
+            <span class="orb-loader">
+                <Icon icon="eos-icons:loading" class="text-base" />
+            </span>
         {/if}
     </div>
     <!-- 展开状态的完整播放器（封面圆形） -->
@@ -887,16 +885,10 @@ onDestroy(() => {
                 </div>
             </div>
             <div class="retro-top-actions flex items-center gap-1">
-                <button class="btn-plain retro-chip-button w-8 h-8 rounded-lg flex items-center justify-center"
-                        onclick={toggleMode}
-                        title={mode === "meting" ? i18n(Key.musicSwitchToLocal) : i18n(Key.musicSwitchToMeting)}>
-                    <Icon icon={mode === "meting" ? "material-symbols:cloud" : "material-symbols:folder"} class="text-lg" />
-                </button>
-                <button class="btn-plain retro-chip-button w-8 h-8 rounded-lg flex items-center justify-center"
-                        class:text-(--primary)={showPlaylist}
-                        onclick={togglePlaylist}
-                        title={i18n(Key.playlist)}>
-                    <Icon icon="material-symbols:queue-music" class="text-lg" />
+                <button class="btn-plain retro-chip-button retro-close-button w-8 h-8 rounded-lg flex items-center justify-center"
+                        onclick={toggleCollapse}
+                        title={i18n(Key.musicCollapse)}>
+                    <Icon icon="material-symbols:close" class="text-lg" />
                 </button>
             </div>
         </div>
@@ -963,17 +955,6 @@ onDestroy(() => {
         </div>
         <div class="controls retro-controls flex items-center justify-center gap-2 mb-4">
             <!-- 播放模式切换按钮 -->
-            <button class="w-10 h-10 rounded-lg btn-plain retro-mini-button"
-                    onclick={togglePlaybackMode}
-                    title={isRepeating === 1 ? i18n(Key.musicRepeatOne) : (isShuffled ? i18n(Key.musicShuffle) : i18n(Key.musicRepeatAll))}>
-                {#if isRepeating === 1}
-                    <Icon icon="material-symbols:repeat-one" class="text-lg" />
-                {:else if isShuffled}
-                    <Icon icon="material-symbols:shuffle" class="text-lg" />
-                {:else}
-                    <Icon icon="material-symbols:repeat" class="text-lg" />
-                {/if}
-            </button>
             <button class="btn-plain retro-mini-button w-10 h-10 rounded-lg" onclick={previousSong}
                     disabled={playlist.length <= 1}>
                 <Icon icon="material-symbols:skip-previous" class="text-xl" />
@@ -985,9 +966,15 @@ onDestroy(() => {
                 {#if isLoading}
                     <Icon icon="eos-icons:loading" class="text-xl" />
                 {:else if isPlaying}
-                    <span class="retro-play-label">PAUSE</span>
+                    <span class="retro-play-inner">
+                        <Icon icon="material-symbols:pause" class="retro-play-icon text-lg" />
+                        <span class="retro-play-label">PAUSE</span>
+                    </span>
                 {:else}
-                    <span class="retro-play-label">PLAY</span>
+                    <span class="retro-play-inner">
+                        <Icon icon="material-symbols:play-arrow" class="retro-play-icon text-lg" />
+                        <span class="retro-play-label">PLAY</span>
+                    </span>
                 {/if}
             </button>
             <button class="btn-plain retro-mini-button w-10 h-10 rounded-lg" onclick={nextSong}

@@ -65,46 +65,124 @@
 }
 
 .music-player {
-    max-width: 362px;
+    max-width: 356px;
     user-select: none;
+    isolation: isolate;
 }
 
 .music-player .orb-player {
     position: relative;
-    width: 3.2rem;
-    height: 3.2rem;
-    border: 1px solid rgba(170, 138, 255, 0.45);
-    background:
-        radial-gradient(circle at 30% 30%, rgba(205, 183, 255, 0.35), transparent 42%),
-        linear-gradient(180deg, rgba(41, 28, 76, 0.96) 0%, rgba(21, 17, 40, 0.96) 100%);
-    box-shadow:
-        0 16px 30px rgba(5, 4, 18, 0.42),
-        inset 0 0 0 1px rgba(214, 196, 255, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    width: 4.25rem;
+    height: 4.25rem;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .music-player .orb-player::before {
     content: "";
     position: absolute;
-    inset: -2px;
+    inset: 0.2rem;
     border-radius: 999px;
-    background: linear-gradient(135deg, rgba(181, 146, 255, 0.55), transparent 35%, rgba(132, 99, 222, 0.4));
-    opacity: 0;
+    background:
+        radial-gradient(circle, rgba(20, 16, 36, 0.92) 0%, rgba(11, 9, 23, 0.3) 62%, transparent 74%);
+    opacity: 1;
     z-index: -1;
-    transition: opacity 0.25s ease;
+    transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .music-player .orb-player:hover::before {
-    opacity: 0.7;
+    opacity: 1;
+    transform: scale(1.03);
 }
 
-.music-player .orb-player .animate-pulse {
-    animation: musicWave 1.35s ease-in-out infinite;
+.orb-record {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at center, rgba(7, 6, 16, 1) 0 10%, rgba(16, 12, 28, 1) 10% 20%, rgba(9, 8, 19, 1) 20% 100%);
+    box-shadow:
+        0 14px 28px rgba(4, 3, 14, 0.4),
+        inset 0 0 0 1px rgba(103, 76, 170, 0.2);
+    overflow: hidden;
+    animation: spin-continuous 6.5s linear infinite;
+    animation-play-state: paused;
+}
+
+.orb-record.spinning {
+    animation-play-state: running;
+}
+
+.orb-record::before {
+    content: "";
+    position: absolute;
+    inset: 0.18rem;
+    border-radius: 999px;
+    background:
+        repeating-radial-gradient(
+            circle,
+            rgba(8, 7, 18, 1) 0 0.22rem,
+            rgba(73, 52, 14, 0.48) 0.22rem 0.24rem,
+            rgba(8, 7, 18, 1) 0.24rem 0.4rem
+        );
+    box-shadow:
+        inset 0 0 0 1px rgba(144, 112, 218, 0.18),
+        0 0 14px rgba(0, 0, 0, 0.2);
+}
+
+.orb-record-art {
+    position: absolute;
+    top: 29%;
+    left: 29%;
+    width: 42%;
+    height: 42%;
+    border-radius: 999px;
+    object-fit: cover;
+    z-index: 2;
+    box-shadow:
+        0 0 0 3px rgba(252, 182, 76, 0.78),
+        0 0 12px rgba(252, 182, 76, 0.18);
+}
+
+.orb-record-hole {
+    position: absolute;
+    top: calc(50% - 0.24rem);
+    left: calc(50% - 0.24rem);
+    width: 0.48rem;
+    height: 0.48rem;
+    border-radius: 999px;
+    background: rgba(39, 28, 10, 0.95);
+    box-shadow: 0 0 0 1px rgba(245, 200, 109, 0.26);
+    z-index: 3;
+}
+
+.orb-loader {
+    position: absolute;
+    inset: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: rgba(20, 16, 36, 0.9);
+    color: #f4eeff;
+    box-shadow:
+        0 6px 12px rgba(5, 4, 16, 0.3),
+        inset 0 0 0 1px rgba(180, 153, 255, 0.2);
+    z-index: 4;
+}
+
+.orb-loader svg {
+    animation: spin-continuous 1s linear infinite;
 }
 
 .expanded-player {
-    width: 362px;
+    width: 356px;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -121,14 +199,14 @@
 }
 
 .retro-player {
-    border: 1px solid rgba(135, 99, 222, 0.42);
-    border-radius: 1.1rem;
+    border: 1px solid rgba(117, 90, 205, 0.72);
+    border-radius: 1rem;
     background:
-        linear-gradient(180deg, rgba(18, 15, 35, 0.98) 0%, rgba(14, 12, 28, 0.98) 100%);
+        linear-gradient(180deg, rgba(25, 19, 48, 0.985) 0%, rgba(13, 11, 28, 0.985) 100%);
     box-shadow:
-        0 22px 56px rgba(4, 4, 14, 0.5),
-        inset 0 0 0 1px rgba(183, 157, 255, 0.06),
-        0 0 0 1px rgba(113, 77, 188, 0.22);
+        0 26px 56px rgba(3, 2, 13, 0.58),
+        inset 0 0 0 1px rgba(210, 191, 255, 0.06),
+        0 0 0 1px rgba(84, 58, 146, 0.35);
     overflow: hidden;
 }
 
@@ -138,25 +216,82 @@
     inset: 0;
     pointer-events: none;
     background:
-        linear-gradient(180deg, rgba(210, 189, 255, 0.06), transparent 16%),
-        radial-gradient(circle at 18% 18%, rgba(156, 109, 255, 0.09), transparent 20%);
-    opacity: 0.95;
+        linear-gradient(180deg, rgba(214, 198, 255, 0.08), transparent 18%),
+        radial-gradient(circle at 22% 16%, rgba(168, 121, 255, 0.12), transparent 22%);
+    opacity: 1;
+}
+
+.retro-player::after {
+    content: "";
+    position: absolute;
+    inset: 0.55rem;
+    border-radius: 0.78rem;
+    border: 1px solid rgba(71, 52, 124, 0.45);
+    pointer-events: none;
+    box-shadow: inset 0 -14px 0 rgba(8, 7, 18, 0.22);
 }
 
 .retro-player-top {
     position: relative;
     align-items: center;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid rgba(121, 90, 205, 0.3);
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid rgba(114, 85, 196, 0.24);
 }
 
 .retro-cover {
-    width: 3.4rem;
-    height: 3.4rem;
-    border: 2px solid rgba(111, 82, 191, 0.55);
+    width: 3.85rem;
+    height: 3.85rem;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.retro-cover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background:
+        repeating-radial-gradient(
+            circle,
+            rgba(8, 7, 18, 1) 0 0.26rem,
+            rgba(106, 79, 23, 0.42) 0.26rem 0.28rem,
+            rgba(8, 7, 18, 1) 0.28rem 0.44rem
+        );
     box-shadow:
-        0 0 0 2px rgba(32, 22, 58, 0.92),
-        0 8px 18px rgba(6, 5, 18, 0.34);
+        0 0 0 1px rgba(135, 103, 212, 0.48),
+        0 0 0 3px rgba(23, 18, 42, 0.95),
+        0 10px 22px rgba(4, 3, 14, 0.4);
+}
+
+.retro-cover::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 0.28rem);
+    left: calc(50% - 0.28rem);
+    width: 0.56rem;
+    height: 0.56rem;
+    border-radius: 999px;
+    background: rgba(35, 25, 10, 0.96);
+    box-shadow:
+        0 0 0 1px rgba(240, 201, 112, 0.24),
+        0 0 0 3px rgba(10, 9, 20, 0.72);
+    z-index: 3;
+}
+
+.retro-cover img {
+    position: absolute;
+    top: 27%;
+    left: 27%;
+    width: 46% !important;
+    height: 46% !important;
+    border-radius: 999px;
+    object-fit: cover;
+    z-index: 2;
+    box-shadow:
+        0 0 0 3px rgba(250, 187, 86, 0.78),
+        0 0 12px rgba(250, 187, 86, 0.18);
+    filter: saturate(1.08) contrast(1.04);
 }
 
 .retro-meta {
@@ -173,10 +308,10 @@
 }
 
 .retro-song-title {
-    font-size: 0.85rem;
-    line-height: 1.45;
-    color: #f0e9ff;
-    text-shadow: 0 0 12px rgba(195, 177, 255, 0.12);
+    font-size: 0.76rem;
+    line-height: 1.36;
+    color: #f4efff;
+    text-shadow: 0 0 10px rgba(195, 177, 255, 0.14);
 }
 
 .retro-song-artist,
@@ -185,15 +320,16 @@
 }
 
 .retro-song-artist {
-    font-size: 0.84rem;
+    font-size: 0.72rem;
 }
 
 .retro-song-timing {
-    font-size: 0.72rem;
+    display: none;
 }
 
 .retro-top-actions {
     align-self: flex-start;
+    margin-left: auto;
 }
 
 .retro-chip-button {
@@ -206,46 +342,94 @@
         0 8px 18px rgba(6, 5, 18, 0.26);
 }
 
+.retro-chip-button,
+.retro-mini-button,
+.retro-play-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.retro-chip-button::before,
+.retro-mini-button::before,
+.retro-play-button::before {
+    content: "";
+    position: absolute;
+    inset: 0.15rem 0.18rem auto;
+    height: 0.32rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+}
+
+.retro-chip-button::after,
+.retro-mini-button::after,
+.retro-play-button::after {
+    content: "";
+    position: absolute;
+    left: 0.28rem;
+    right: 0.28rem;
+    bottom: 0.2rem;
+    height: 0.16rem;
+    border-radius: 999px;
+    background: rgba(92, 67, 167, 0.65);
+    pointer-events: none;
+}
+
 .retro-chip-button:hover {
     color: #f4eeff;
     border-color: rgba(170, 138, 255, 0.55);
 }
 
+.retro-close-button {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    color: rgba(218, 207, 255, 0.72);
+}
+
+.retro-close-button::before,
+.retro-close-button::after {
+    display: none;
+}
+
 .retro-progress-section {
-    margin-bottom: 0.9rem;
+    margin-bottom: 0.85rem;
 }
 
 .retro-progress-bar,
 .retro-volume-bar {
     position: relative;
-    height: 0.5rem;
-    border: 1px solid rgba(90, 67, 156, 0.52);
-    background: rgba(8, 8, 18, 0.95);
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.55);
+    height: 0.48rem;
+    border: 1px solid rgba(87, 65, 152, 0.62);
+    border-radius: 0.18rem;
+    background: rgba(8, 8, 18, 0.98);
+    box-shadow:
+        inset 0 1px 4px rgba(0, 0, 0, 0.62),
+        inset 0 0 0 1px rgba(51, 41, 82, 0.34);
 }
 
 .retro-progress-fill,
 .retro-volume-fill {
     background:
-        linear-gradient(90deg, rgba(177, 150, 255, 0.86), rgba(154, 124, 244, 0.98));
+        linear-gradient(90deg, rgba(203, 171, 255, 0.96), rgba(149, 118, 235, 0.98));
     box-shadow:
-        0 0 12px rgba(168, 133, 255, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+        0 0 12px rgba(168, 133, 255, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .retro-controls {
-    gap: 0.5rem;
-    margin-bottom: 0.95rem;
+    gap: 0.55rem;
+    margin-bottom: 0.85rem;
 }
 
 .retro-mini-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.7rem;
-    height: 2.7rem;
-    border: 1px solid rgba(109, 80, 194, 0.5);
-    border-radius: 0.72rem;
+    width: 2.45rem;
+    height: 2.25rem;
+    border: 1px solid rgba(109, 80, 194, 0.56);
+    border-radius: 0.7rem;
     background:
         linear-gradient(180deg, rgba(31, 24, 56, 0.98) 0%, rgba(18, 15, 34, 0.98) 100%);
     color: rgba(223, 211, 255, 0.88);
@@ -260,10 +444,14 @@
 }
 
 .retro-play-button {
-    min-width: 11.8rem;
-    height: 2.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 11rem;
+    height: 2.55rem;
+    padding-inline: 0.95rem;
     border: 2px solid rgba(177, 151, 255, 0.9);
-    border-radius: 0.82rem;
+    border-radius: 0.78rem;
     background:
         linear-gradient(180deg, rgba(188, 166, 255, 0.96) 0%, rgba(149, 118, 235, 0.98) 100%);
     color: #fbf8ff;
@@ -276,8 +464,19 @@
     filter: brightness(1.04);
 }
 
+.retro-play-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.34rem;
+}
+
+.retro-play-icon {
+    color: rgba(255, 250, 255, 0.92);
+}
+
 .retro-play-label {
-    font-size: 0.88rem;
+    font-size: 0.8rem;
+    line-height: 1;
 }
 
 .playlist-panel {
@@ -317,18 +516,20 @@
 
 .playlist-content::-webkit-scrollbar,
 .lyrics-container::-webkit-scrollbar {
-    width: 6px;
+    width: 12px;
 }
 
 .playlist-content::-webkit-scrollbar-track,
 .lyrics-container::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(10, 9, 19, 0.88);
+    border-left: 1px solid rgba(90, 67, 156, 0.26);
 }
 
 .playlist-content::-webkit-scrollbar-thumb,
 .lyrics-container::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    background: rgba(126, 96, 211, 0.58);
+    border-radius: 0.45rem;
+    border: 2px solid rgba(15, 13, 28, 0.94);
+    background: rgba(124, 118, 137, 0.78);
 }
 
 .retro-lyrics-section {
@@ -388,40 +589,60 @@
 }
 
 .retro-queue-list {
-    border: 1px solid rgba(88, 65, 152, 0.34);
-    border-radius: 1rem;
+    padding: 0.38rem;
+    border: 1px solid rgba(88, 65, 152, 0.42);
+    border-radius: 0.75rem;
     background:
-        linear-gradient(180deg, rgba(12, 10, 24, 0.9) 0%, rgba(10, 9, 20, 0.95) 100%);
+        linear-gradient(180deg, rgba(12, 10, 24, 0.94) 0%, rgba(10, 9, 20, 0.97) 100%);
     box-shadow: inset 0 0 0 1px rgba(199, 181, 255, 0.03);
 }
 
 .retro-queue-item {
+    position: relative;
     align-items: center;
-    border-bottom: 1px solid rgba(82, 61, 138, 0.22);
-    background: transparent;
+    margin: 0.34rem;
+    padding: 0.72rem 2.5rem 0.72rem 0.7rem;
+    border: 1px solid rgba(82, 61, 138, 0.54);
+    border-radius: 0.42rem;
+    background:
+        linear-gradient(180deg, rgba(22, 18, 39, 0.96) 0%, rgba(15, 13, 30, 0.96) 100%);
 }
 
 .retro-queue-item:last-child {
-    border-bottom: 0;
+    border-bottom: 1px solid rgba(82, 61, 138, 0.54);
+}
+
+.retro-queue-item::after {
+    content: ">";
+    position: absolute;
+    top: 50%;
+    right: 0.82rem;
+    transform: translateY(-50%);
+    color: rgba(205, 192, 245, 0.48);
+    font-family: "Press Start 2P", var(--font-mono), monospace;
+    font-size: 0.54rem;
 }
 
 .retro-queue-item:hover,
 .retro-queue-item:focus-visible {
-    background: rgba(30, 24, 54, 0.96);
+    background: rgba(31, 25, 56, 0.98);
+    border-color: rgba(130, 101, 214, 0.74);
     outline: none;
 }
 
 .retro-queue-item-active {
     background:
-        linear-gradient(90deg, rgba(32, 64, 84, 0.92) 0%, rgba(28, 45, 64, 0.9) 100%);
+        linear-gradient(180deg, rgba(36, 30, 62, 0.98) 0%, rgba(25, 21, 44, 0.98) 100%);
+    border-color: rgba(166, 134, 255, 0.78);
+    box-shadow: 0 0 0 1px rgba(102, 75, 183, 0.28);
 }
 
 .retro-queue-thumb {
-    border: 1px solid rgba(104, 78, 177, 0.35);
-    box-shadow: 0 6px 16px rgba(8, 7, 22, 0.26);
+    display: none;
 }
 
 .retro-queue-status {
+    width: 1.9rem;
     color: rgba(221, 211, 255, 0.72);
 }
 
@@ -429,9 +650,28 @@
     min-width: 0;
 }
 
+.retro-track-meta > .text-sm,
 .retro-track-duration {
-    color: rgba(214, 204, 248, 0.62);
-    font-variant-numeric: tabular-nums;
+    display: none;
+}
+
+.retro-track-title {
+    font-size: 0.72rem;
+    color: #f0ebff;
+}
+
+.retro-detail-panel .retro-track-meta > div:nth-child(2) {
+    display: none;
+}
+
+.retro-detail-panel .retro-track-duration,
+.retro-detail-panel .retro-track-chevron {
+    display: none;
+}
+
+.retro-track-number {
+    font-size: 0.66rem;
+    color: rgba(227, 218, 255, 0.72);
 }
 
 .retro-empty-state {
@@ -467,19 +707,19 @@
 
 @media (max-width: 768px) {
     .music-player {
-        max-width: 320px;
+        max-width: 328px;
         bottom: 8px !important;
         right: 8px !important;
     }
 
     .music-player.expanded {
         width: calc(100vw - 16px);
-        max-width: 362px;
+        max-width: 356px;
         right: 8px !important;
     }
 
     .expanded-player {
-        width: min(calc(100vw - 16px), 362px) !important;
+        width: min(calc(100vw - 16px), 356px) !important;
     }
 
     .playlist-panel {
@@ -488,7 +728,7 @@
     }
 
     .retro-play-button {
-        min-width: 9.6rem;
+        min-width: 9.2rem;
     }
 
     .retro-song-title {
