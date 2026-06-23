@@ -865,24 +865,25 @@ onDestroy(() => {
         {/if}
     </div>
     <!-- 展开状态的完整播放器（封面圆形） -->
-    <div class="expanded-player retro-player card-base bg-(--float-panel-bg) shadow-xl rounded-2xl p-4 transition-all duration-500 ease-in-out"
+    <div class="expanded-player retro-player card-base bg-(--float-panel-bg) shadow-xl rounded-2xl p-3 transition-all duration-500 ease-in-out"
          class:opacity-0={isCollapsed}
          class:scale-95={isCollapsed}
          class:pointer-events-auto={!isCollapsed}
          class:pointer-events-none={isCollapsed}>
-        <div class="retro-player-top flex items-center gap-4 mb-4">
-            <div class="cover-container retro-cover relative w-16 h-16 rounded-full overflow-hidden shrink-0">
+        <div class="retro-player-top flex items-center gap-3 mb-3">
+            <div class="cover-container retro-cover relative w-14 h-14 rounded-full overflow-hidden shrink-0">
                 <img src={getAssetPath(currentSong.cover)} alt="封面"
                      class="w-full h-full object-cover transition-transform duration-300"
                      class:spinning={isPlaying && !isLoading}
                      class:animate-pulse={isLoading} />
             </div>
             <div class="retro-meta flex-1 min-w-0">
-                <div class="song-title retro-song-title text-lg font-bold text-90 truncate mb-1">{currentSong.title}</div>
-                <div class="song-artist retro-song-artist text-sm text-50 truncate">{currentSong.artist}</div>
-                <div class="retro-song-timing text-xs text-30 mt-1">
-                    {formatTime(currentTime)} / {formatTime(duration)}
-                </div>
+                <button class="retro-meta-button"
+                        onclick={togglePlaylist}
+                        title={i18n(Key.playlist)}>
+                    <div class="song-title retro-song-title text-lg font-bold text-90 truncate mb-1">{currentSong.title}</div>
+                    <div class="song-artist retro-song-artist text-sm text-50 truncate">{currentSong.artist}</div>
+                </button>
             </div>
             <div class="retro-top-actions flex items-center gap-1">
                 <button class="btn-plain retro-chip-button retro-close-button w-8 h-8 rounded-lg flex items-center justify-center"
@@ -924,7 +925,7 @@ onDestroy(() => {
             </div>
         </div>
         {/if}
-        <div class="progress-section retro-progress-section mb-4">
+        <div class="progress-section retro-progress-section mb-3">
             <div class="progress-bar retro-progress-bar flex-1 h-2 bg-(--btn-regular-bg) rounded-full cursor-pointer"
                 bind:this={progressBar}
                 onclick={setProgress}
@@ -953,7 +954,7 @@ onDestroy(() => {
                 </div>
             </div>
         </div>
-        <div class="controls retro-controls flex items-center justify-center gap-2 mb-4">
+        <div class="controls retro-controls flex items-center gap-2">
             <!-- 播放模式切换按钮 -->
             <button class="btn-plain retro-mini-button w-10 h-10 rounded-lg" onclick={previousSong}
                     disabled={playlist.length <= 1}>
@@ -982,10 +983,16 @@ onDestroy(() => {
                 <Icon icon="material-symbols:skip-next" class="text-xl" />
             </button>
             <!-- 歌词显示切换按钮 -->
-            <button class="w-10 h-10 rounded-lg btn-plain retro-mini-button"
-                    onclick={toggleLyrics}
+            <button class="w-10 h-10 rounded-lg btn-plain retro-mini-button retro-volume-button"
+                    onclick={toggleMute}
                     title="切换歌词显示">
-                <Icon icon="material-symbols:lyrics" class="text-lg {showLyrics ? 'text-(--primary)' : 'opacity-90'}" />
+                {#if isMuted || volume === 0}
+                    <Icon icon="material-symbols:volume-off" class="text-lg" />
+                {:else if volume < 0.5}
+                    <Icon icon="material-symbols:volume-down" class="text-lg" />
+                {:else}
+                    <Icon icon="material-symbols:volume-up" class="text-lg" />
+                {/if}
             </button>
         </div>
         <div class="bottom-controls retro-bottom-controls flex items-center gap-2">
@@ -1026,7 +1033,7 @@ onDestroy(() => {
             </button>
         </div>
         {#if showPlaylist}
-        <div class="retro-detail-panel mt-4" transition:slide={{ duration: 260 }}>
+        <div class="retro-detail-panel mt-3" transition:slide={{ duration: 260 }}>
             <div class="retro-detail-header flex items-center justify-between gap-3">
                 <div class="flex items-center gap-2 min-w-0">
                     <span class="retro-heading retro-detail-title">{i18n(Key.playlist)}</span>
@@ -1046,7 +1053,7 @@ onDestroy(() => {
                 {/if}
             </div>
             {#if playlist.length > 0}
-            <div class="playlist-content retro-queue-list overflow-y-auto max-h-72 mt-3">
+            <div class="playlist-content retro-queue-list overflow-y-auto max-h-44 mt-2">
                 {#each playlist as song, index}
                     <button class="playlist-item retro-queue-item w-full flex items-center gap-3 p-3 text-left transition-colors"
                             class:retro-queue-item-active={index === currentIndex}
@@ -1075,7 +1082,7 @@ onDestroy(() => {
                 {/each}
             </div>
             {:else}
-            <div class="retro-empty-state mt-3">
+            <div class="retro-empty-state mt-2">
                 {i18n(Key.musicNoSongsAvailable)}
             </div>
             {/if}

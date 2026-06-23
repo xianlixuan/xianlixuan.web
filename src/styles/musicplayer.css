@@ -65,7 +65,7 @@
 }
 
 .music-player {
-    max-width: 356px;
+    max-width: 344px;
     user-select: none;
     isolation: isolate;
 }
@@ -182,7 +182,7 @@
 }
 
 .expanded-player {
-    width: 356px;
+    width: 344px;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -224,8 +224,8 @@
 .retro-player::after {
     content: "";
     position: absolute;
-    inset: 0.55rem;
-    border-radius: 0.78rem;
+    inset: 0.45rem;
+    border-radius: 0.72rem;
     border: 1px solid rgba(71, 52, 124, 0.45);
     pointer-events: none;
     box-shadow: inset 0 -14px 0 rgba(8, 7, 18, 0.22);
@@ -234,13 +234,13 @@
 .retro-player-top {
     position: relative;
     align-items: center;
-    padding-bottom: 0.7rem;
+    padding-bottom: 0.56rem;
     border-bottom: 1px solid rgba(114, 85, 196, 0.24);
 }
 
 .retro-cover {
-    width: 3.85rem;
-    height: 3.85rem;
+    width: 3.35rem;
+    height: 3.35rem;
     border: 0;
     background: transparent;
     box-shadow: none;
@@ -298,6 +298,24 @@
     min-width: 0;
 }
 
+.retro-meta-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+}
+
+.retro-meta-button:focus-visible {
+    outline: none;
+}
+
+.retro-meta-button:hover .retro-song-title,
+.retro-meta-button:focus-visible .retro-song-title {
+    color: #fff8ff;
+}
+
 .retro-song-title,
 .retro-heading,
 .retro-play-label,
@@ -308,7 +326,7 @@
 }
 
 .retro-song-title {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     line-height: 1.36;
     color: #f4efff;
     text-shadow: 0 0 10px rgba(195, 177, 255, 0.14);
@@ -320,7 +338,7 @@
 }
 
 .retro-song-artist {
-    font-size: 0.72rem;
+    font-size: 0.66rem;
 }
 
 .retro-song-timing {
@@ -393,7 +411,7 @@
 }
 
 .retro-progress-section {
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.7rem;
 }
 
 .retro-progress-bar,
@@ -418,16 +436,17 @@
 }
 
 .retro-controls {
-    gap: 0.55rem;
-    margin-bottom: 0.85rem;
+    justify-content: space-between;
+    gap: 0.45rem;
+    margin-bottom: 0;
 }
 
 .retro-mini-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.45rem;
-    height: 2.25rem;
+    width: 2.25rem;
+    height: 2.15rem;
     border: 1px solid rgba(109, 80, 194, 0.56);
     border-radius: 0.7rem;
     background:
@@ -447,8 +466,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 11rem;
-    height: 2.55rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 2.45rem;
     padding-inline: 0.95rem;
     border: 2px solid rgba(177, 151, 255, 0.9);
     border-radius: 0.78rem;
@@ -467,6 +487,8 @@
 .retro-play-inner {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     gap: 0.34rem;
 }
 
@@ -555,18 +577,16 @@
 }
 
 .retro-bottom-controls {
-    align-items: center;
-    gap: 0.7rem;
-    padding-top: 0.25rem;
+    display: none;
 }
 
 .retro-detail-panel {
     border-top: 1px solid rgba(104, 78, 177, 0.28);
-    padding-top: 0.95rem;
+    padding-top: 0.72rem;
 }
 
 .retro-detail-header {
-    align-items: center;
+    display: none;
 }
 
 .retro-detail-title {
@@ -589,9 +609,9 @@
 }
 
 .retro-queue-list {
-    padding: 0.38rem;
+    padding: 0.18rem;
     border: 1px solid rgba(88, 65, 152, 0.42);
-    border-radius: 0.75rem;
+    border-radius: 0.58rem;
     background:
         linear-gradient(180deg, rgba(12, 10, 24, 0.94) 0%, rgba(10, 9, 20, 0.97) 100%);
     box-shadow: inset 0 0 0 1px rgba(199, 181, 255, 0.03);
@@ -600,8 +620,8 @@
 .retro-queue-item {
     position: relative;
     align-items: center;
-    margin: 0.34rem;
-    padding: 0.72rem 2.5rem 0.72rem 0.7rem;
+    margin: 0.18rem;
+    padding: 0.62rem 2rem 0.62rem 0.66rem;
     border: 1px solid rgba(82, 61, 138, 0.54);
     border-radius: 0.42rem;
     background:
@@ -642,7 +662,7 @@
 }
 
 .retro-queue-status {
-    width: 1.9rem;
+    width: 1.6rem;
     color: rgba(221, 211, 255, 0.72);
 }
 
@@ -656,7 +676,7 @@
 }
 
 .retro-track-title {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     color: #f0ebff;
 }
 
@@ -678,13 +698,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 5rem;
+    min-height: 4rem;
     border: 1px dashed rgba(108, 79, 190, 0.34);
-    border-radius: 1rem;
+    border-radius: 0.72rem;
     color: rgba(214, 204, 248, 0.62);
     background: rgba(14, 12, 28, 0.76);
     text-align: center;
-    padding: 1rem;
+    padding: 0.85rem;
 }
 
 .progress-section div:hover,
@@ -707,19 +727,19 @@
 
 @media (max-width: 768px) {
     .music-player {
-        max-width: 328px;
+        max-width: 320px;
         bottom: 8px !important;
         right: 8px !important;
     }
 
     .music-player.expanded {
         width: calc(100vw - 16px);
-        max-width: 356px;
+        max-width: 344px;
         right: 8px !important;
     }
 
     .expanded-player {
-        width: min(calc(100vw - 16px), 356px) !important;
+        width: min(calc(100vw - 16px), 344px) !important;
     }
 
     .playlist-panel {
@@ -727,11 +747,7 @@
         max-width: none;
     }
 
-    .retro-play-button {
-        min-width: 9.2rem;
-    }
-
     .retro-song-title {
-        font-size: 0.74rem;
+        font-size: 0.7rem;
     }
 }
