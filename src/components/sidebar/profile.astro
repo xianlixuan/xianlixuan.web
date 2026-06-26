@@ -1,4 +1,4 @@
----
+﻿---
 import { Icon } from "astro-icon/components";
 
 import { profileConfig } from "@/config";
@@ -8,7 +8,7 @@ import ImageWrapper from "@/components/common/imageWrapper.astro";
 
 const realNameRaw = (profileConfig.bio || "").split(/\n\n+/)[0]?.trim() || "Phichit Sapnan (Wang)";
 const realName = realNameRaw.replace(/\(([^)]+)\)/g, "\"$1\"");
-const roleLineEn = "OSCP+ · CPTS · Penetration Tester · CTF Player";
+const roleLineEn = "OSCP+ ยท CPTS ยท Penetration Tester ยท CTF Player";
 const quoteEn = "Breaking things to understand them, then writing it all down.";
 const locationEn = "Thailand";
 const aboutEn = "ABOUT ME";
@@ -17,8 +17,9 @@ const findProfileLink = (name: string) =>
     profileConfig.links?.find((item) => item.name.trim().toLowerCase() === name.toLowerCase());
 
 const facebookLink = findProfileLink("facebook");
+const instagramLink = findProfileLink("instagram");
 const linkedInLink = findProfileLink("linkedin");
-const githubLink = findProfileLink("github");
+const hashnodeLink = findProfileLink("hashnode");
 const mediumLink = findProfileLink("medium");
 
 type SocialItem = {
@@ -29,11 +30,11 @@ type SocialItem = {
 };
 
 const socialLinks: SocialItem[] = [
-    { name: "Facebook", icon: facebookLink?.icon || "fa6-brands:facebook-f", url: facebookLink?.url, external: true },
-    { name: "LinkedIn", icon: linkedInLink?.icon || "fa6-brands:linkedin-in", url: linkedInLink?.url, external: true },
+    { name: "Facebook", icon: facebookLink?.icon || "fa6-brands:facebook", url: facebookLink?.url, external: true },
+    { name: "Instagram", icon: instagramLink?.icon || "fa6-brands:instagram", url: instagramLink?.url, external: true },
+    { name: "LinkedIn", icon: linkedInLink?.icon || "fa6-brands:linkedin", url: linkedInLink?.url, external: true },
+    { name: "Hashnode", icon: hashnodeLink?.icon || "fa6-brands:hashnode", url: hashnodeLink?.url, external: true },
     { name: "Medium", icon: mediumLink?.icon || "fa6-brands:medium", url: mediumLink?.url, external: true },
-    { name: "GitHub", icon: githubLink?.icon || "fa6-brands:github", url: githubLink?.url, external: true },
-    { name: "Portfolio", icon: "material-symbols:folder-copy-rounded", url: url("/about/"), external: false },
 ];
 
 interface Props {
@@ -190,25 +191,25 @@ const id = `profile-${side}`;
         justify-content: center;
         width: 2.55rem;
         height: 2.55rem;
-        border-radius: 0.82rem;
-        border: 1px solid rgba(164, 182, 255, 0.18);
-        background: linear-gradient(180deg, rgba(47, 73, 143, 0.62), rgba(20, 34, 74, 0.88));
-        color: rgba(245, 240, 255, 0.96);
+        border-radius: 0.72rem;
+        border: 1px solid rgba(109, 93, 171, 0.58);
+        background: rgba(62, 49, 111, 0.72);
+        color: rgba(245, 240, 255, 0.92);
         box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.05),
-            0 10px 24px rgba(8, 12, 32, 0.34),
-            0 0 16px rgba(164, 182, 255, 0.06);
-        transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+            0 1px 0 rgba(255, 255, 255, 0.04),
+            0 0 0 1px rgba(31, 22, 66, 0.34),
+            0 10px 18px rgba(7, 8, 24, 0.18);
+        transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
     }
 
     .profile-social-btn:hover {
-        transform: translateY(-2px);
-        border-color: rgba(138, 245, 255, 0.24);
-        background: linear-gradient(180deg, rgba(60, 92, 173, 0.68), rgba(24, 42, 87, 0.92));
+        transform: translateY(-1px);
+        border-color: rgba(139, 117, 214, 0.72);
+        background: rgba(76, 60, 134, 0.8);
         box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.06),
-            0 12px 26px rgba(8, 12, 32, 0.36),
-            0 0 18px rgba(138, 245, 255, 0.1);
+            0 1px 0 rgba(255, 255, 255, 0.05),
+            0 0 0 1px rgba(45, 34, 88, 0.38),
+            0 8px 16px rgba(7, 8, 24, 0.18);
     }
 
     .profile-social-btn.is-disabled {

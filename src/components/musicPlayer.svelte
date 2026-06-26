@@ -870,8 +870,8 @@ onDestroy(() => {
          class:scale-95={isCollapsed}
          class:pointer-events-auto={!isCollapsed}
          class:pointer-events-none={isCollapsed}>
-        <div class="retro-player-top flex items-center gap-3 mb-3">
-            <div class="cover-container retro-cover relative w-14 h-14 rounded-full overflow-hidden shrink-0">
+        <div class="retro-player-top">
+            <div class="cover-container retro-cover relative overflow-hidden shrink-0">
                 <img src={getAssetPath(currentSong.cover)} alt="封面"
                      class="w-full h-full object-cover transition-transform duration-300"
                      class:spinning={isPlaying && !isLoading}
@@ -881,12 +881,12 @@ onDestroy(() => {
                 <button class="retro-meta-button"
                         onclick={togglePlaylist}
                         title={i18n(Key.playlist)}>
-                    <div class="song-title retro-song-title text-lg font-bold text-90 truncate mb-1">{currentSong.title}</div>
-                    <div class="song-artist retro-song-artist text-sm text-50 truncate">{currentSong.artist}</div>
+                    <div class="song-title retro-song-title">{currentSong.title}</div>
+                    <div class="song-artist retro-song-artist">{currentSong.artist}</div>
                 </button>
             </div>
-            <div class="retro-top-actions flex items-center gap-1">
-                <button class="btn-plain retro-chip-button retro-close-button w-8 h-8 rounded-lg flex items-center justify-center"
+            <div class="retro-top-actions">
+                <button class="btn-plain retro-chip-button retro-close-button"
                         onclick={toggleCollapse}
                         title={i18n(Key.musicCollapse)}>
                     <Icon icon="material-symbols:close" class="text-lg" />
@@ -925,8 +925,8 @@ onDestroy(() => {
             </div>
         </div>
         {/if}
-        <div class="progress-section retro-progress-section mb-3">
-            <div class="progress-bar retro-progress-bar flex-1 h-2 bg-(--btn-regular-bg) rounded-full cursor-pointer"
+        <div class="progress-section retro-progress-section">
+            <div class="progress-bar retro-progress-bar cursor-pointer"
                 bind:this={progressBar}
                 onclick={setProgress}
                 onkeydown={(e) => {
@@ -949,18 +949,20 @@ onDestroy(() => {
                 aria-valuemin="0"
                 aria-valuemax="100"
                 aria-valuenow={duration > 0 ? (currentTime / duration * 100) : 0}>
-                <div class="retro-progress-fill h-full bg-(--primary) rounded-full transition-all duration-100"
+                <div class="retro-progress-fill transition-all duration-100"
                     style="width: {duration > 0 ? (currentTime / duration) * 100 : 0}%">
                 </div>
             </div>
         </div>
-        <div class="controls retro-controls flex items-center gap-2">
-            <!-- 播放模式切换按钮 -->
-            <button class="btn-plain retro-mini-button w-10 h-10 rounded-lg" onclick={previousSong}
-                    disabled={playlist.length <= 1}>
-                <Icon icon="material-symbols:skip-previous" class="text-xl" />
-            </button>
-            <button class="btn-regular retro-play-button w-12 h-12 rounded-full"
+        <div class="controls retro-controls">
+            <div class="retro-control-cluster retro-control-cluster-left">
+                <button class="btn-plain retro-mini-button retro-nav-button"
+                        onclick={previousSong}
+                        disabled={playlist.length <= 1}>
+                    <Icon icon="material-symbols:skip-previous" class="text-xl" />
+                </button>
+            </div>
+            <button class="btn-regular retro-play-button"
                     class:opacity-50={isLoading}
                     disabled={isLoading}
                     onclick={togglePlay}>
@@ -978,22 +980,24 @@ onDestroy(() => {
                     </span>
                 {/if}
             </button>
-            <button class="btn-plain retro-mini-button w-10 h-10 rounded-lg" onclick={nextSong}
-                    disabled={playlist.length <= 1}>
-                <Icon icon="material-symbols:skip-next" class="text-xl" />
-            </button>
-            <!-- 歌词显示切换按钮 -->
-            <button class="w-10 h-10 rounded-lg btn-plain retro-mini-button retro-volume-button"
-                    onclick={toggleMute}
-                    title="切换歌词显示">
-                {#if isMuted || volume === 0}
-                    <Icon icon="material-symbols:volume-off" class="text-lg" />
-                {:else if volume < 0.5}
-                    <Icon icon="material-symbols:volume-down" class="text-lg" />
-                {:else}
-                    <Icon icon="material-symbols:volume-up" class="text-lg" />
-                {/if}
-            </button>
+            <div class="retro-control-cluster retro-control-cluster-right">
+                <button class="btn-plain retro-mini-button retro-nav-button"
+                        onclick={nextSong}
+                        disabled={playlist.length <= 1}>
+                    <Icon icon="material-symbols:skip-next" class="text-xl" />
+                </button>
+                <button class="btn-plain retro-mini-button retro-volume-button"
+                        onclick={toggleMute}
+                        title={i18n(Key.musicVolume)}>
+                    {#if isMuted || volume === 0}
+                        <Icon icon="material-symbols:volume-off" class="text-lg" />
+                    {:else if volume < 0.5}
+                        <Icon icon="material-symbols:volume-down" class="text-lg" />
+                    {:else}
+                        <Icon icon="material-symbols:volume-up" class="text-lg" />
+                    {/if}
+                </button>
+            </div>
         </div>
         <div class="bottom-controls retro-bottom-controls flex items-center gap-2">
             <button class="btn-plain retro-chip-button w-8 h-8 rounded-lg" onclick={toggleMute}>
@@ -1033,7 +1037,7 @@ onDestroy(() => {
             </button>
         </div>
         {#if showPlaylist}
-        <div class="retro-detail-panel mt-3" transition:slide={{ duration: 260 }}>
+        <div class="retro-detail-panel" transition:slide={{ duration: 260 }}>
             <div class="retro-detail-header flex items-center justify-between gap-3">
                 <div class="flex items-center gap-2 min-w-0">
                     <span class="retro-heading retro-detail-title">{i18n(Key.playlist)}</span>
@@ -1053,26 +1057,26 @@ onDestroy(() => {
                 {/if}
             </div>
             {#if playlist.length > 0}
-            <div class="playlist-content retro-queue-list overflow-y-auto max-h-44 mt-2">
+            <div class="playlist-content retro-queue-list overflow-y-auto max-h-44">
                 {#each playlist as song, index}
-                    <button class="playlist-item retro-queue-item w-full flex items-center gap-3 p-3 text-left transition-colors"
+                    <button class="playlist-item retro-queue-item w-full flex items-center text-left transition-colors"
                             class:retro-queue-item-active={index === currentIndex}
                             onclick={() => playSong(index)}
                             title={`${song.title} - ${song.artist}`}>
-                        <div class="retro-queue-status w-7 h-7 shrink-0 flex items-center justify-center">
+                        <div class="retro-queue-status shrink-0 flex items-center justify-center">
                             {#if index === currentIndex && isPlaying}
                                 <Icon icon="material-symbols:graphic-eq" class="text-(--primary) animate-pulse" />
                             {:else if index === currentIndex}
                                 <Icon icon="material-symbols:pause" class="text-(--primary)" />
                             {:else}
-                                <span class="retro-track-number text-sm">{String(index + 1).padStart(2, "0")}</span>
+                                <span class="retro-track-number">{String(index + 1).padStart(2, "0")}</span>
                             {/if}
                         </div>
                         <div class="retro-queue-thumb w-10 h-10 rounded-lg overflow-hidden shrink-0">
                             <img src={getAssetPath(song.cover)} alt={song.title} class="w-full h-full object-cover" />
                         </div>
                         <div class="retro-track-meta flex-1 min-w-0">
-                            <div class="retro-track-title truncate">{song.title}</div>
+                            <div class="retro-track-title">{song.title}</div>
                             <div class="text-sm text-(--content-meta) truncate">{song.artist}</div>
                         </div>
                         <div class="retro-track-duration text-xs shrink-0">
