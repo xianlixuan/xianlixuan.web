@@ -1,0 +1,141 @@
+🚀 开始扫描图标...
+📦 发现 27 个唯一图标
+✅ 已生成 C:\Users\phichitio\Documents\GitHub\Portfolio-Preview\src\utils\icons.ts
+[2m15:37:45[22m [34m[types][39m Generated [2m3ms[22m
+[2m15:37:47[22m [34m[content][39m Syncing content
+[33m[1m15:37:47[22m [WARN] [glob-loader][39m No files found matching "**/[^_]*.{md,mdx}" in directory "src\content\posts"
+[2m15:37:47[22m [34m[content][39m Synced content
+[2m15:37:47[22m [34m[vite][39m Forced re-optimization of dependencies
+
+[42m[1m astro [22m[49m [32mv5.16.15[39m [2mready in[22m 17092 [2mms[22m
+
+[2m┃[22m Local    [36mhttp://127.0.0.1:4321/[39m
+
+[2m15:37:47[22m [32mwatching for file changes...[39m
+3:37:55 PM [vite-plugin-svelte] C:/Users/phichitio/Documents/GitHub/Portfolio-Preview/src/components/sidebar/statistics.svelte:1:8 `context="module"` is deprecated, use the `module` attribute instead
+https://svelte.dev/e/script_context_deprecated
+[33m[1m15:37:57[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[33m[1m15:37:59[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:37:59[22m [34m[200][39m /hall-of-fame/ [2m2016ms[22m
+[33m[1m15:38:00[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:38:02[22m [34m[vite][39m [32m✨ new dependencies optimized: [33m@swup/astro/serialise, @swup/astro/idle, @swup/astro/client/Swup, @swup/astro/client/SwupA11yPlugin, @swup/astro/client/SwupPreloadPlugin, @swup/astro/client/SwupHeadPlugin, @swup/astro/client/SwupScriptsPlugin[32m[39m
+[2m15:38:02[22m [34m[vite][39m [32m✨ optimized dependencies changed. reloading[39m
+[2m15:38:03[22m [34m[200][39m /hall-of-fame/ [2m221ms[22m
+[33m[1m15:38:03[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:38:04[22m [34m[200][39m /hall-of-fame/ [2m64ms[22m
+[2m15:38:24[22m [34m[200][39m /hall-of-fame/ [2m81ms[22m
+[2m15:38:56[22m [34m[200][39m /hall-of-fame/ [2m107ms[22m
+[2m15:38:58[22m [34m[200][39m /hall-of-fame/ [2m105ms[22m
+[2m15:41:39[22m [34m[watch][39m /src/pages/hall-of-fame.astro?astro&type=style&index=0&lang.css
+[2m15:41:39[22m [34m[watch][39m src/pages/hall-of-fame.astro
+[33m[1m15:42:28[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[33m[1m15:42:29[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:42:29[22m [34m[200][39m /hall-of-fame/ [2m441ms[22m
+[33m[1m15:42:30[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:42:30[22m [34m[200][39m /hall-of-fame/ [2m86ms[22m
+[2m15:44:25[22m [34m[200][39m /hall-of-fame/ [2m43ms[22m
+[2m15:44:28[22m [34m[200][39m /hall-of-fame/ [2m69ms[22m
+[2m15:44:51[22m [34m[200][39m /archive/ [2m50ms[22m
+[2m15:44:51[22m [34m[200][39m /blog/ [2m47ms[22m
+[2m15:44:51[22m [34m[200][39m /about/ [2m215ms[22m
+[2m15:45:08[22m [34m[200][39m / [2m52ms[22m
+[2m15:53:14[22m [34m[watch][39m src/components/sidebar/profile.astro
+[33m[1m15:53:48[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[33m[1m15:53:48[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:53:48[22m [34m[200][39m / [2m121ms[22m
+[33m[1m15:53:48[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:53:49[22m [34m[200][39m / [2m50ms[22m
+[2m15:54:10[22m [34m[200][39m / [2m52ms[22m
+[2m15:54:11[22m [34m[200][39m / [2m52ms[22m
+[2m15:56:41[22m [34m[watch][39m /src/components/sidebar/profile.astro?astro&type=style&index=0&lang.css
+[2m15:56:41[22m [34m[watch][39m src/components/sidebar/profile.astro
+[33m[1m15:57:01[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[33m[1m15:57:01[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:57:02[22m [34m[200][39m / [2m794ms[22m
+[33m[1m15:57:02[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m15:57:22[22m [34m[200][39m / [2m57ms[22m
+[2m15:58:25[22m [34m[200][39m / [2m46ms[22m
+[2m15:58:26[22m [34m[200][39m / [2m89ms[22m
+[2m15:58:27[22m [34m[200][39m /about/ [2m71ms[22m
+3:58:49 PM [vite-plugin-svelte] C:/Users/phichitio/Documents/GitHub/Portfolio-Preview/src/components/sidebar/statistics.svelte:1:8 `context="module"` is deprecated, use the `module` attribute instead
+https://svelte.dev/e/script_context_deprecated
+[2m15:58:59[22m [34m[200][39m /hall-of-fame/ [2m72ms[22m
+[2m15:59:00[22m [34m[200][39m /blog/ [2m71ms[22m

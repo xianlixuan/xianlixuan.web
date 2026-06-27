@@ -10,37 +10,136 @@ import BackwardButton from "@components/backwardButton.astro";
 const pageTitle = LinkPresets[LinkPreset.HallOfFame].name;
 const pageDescription = LinkPresets[LinkPreset.HallOfFame].description;
 
+const tierInfo = {
+    gold: {
+        label: "GOLD",
+        note: "Strongest role-aligned signal in this set.",
+        color: "#efb94e",
+    },
+    silver: {
+        label: "SILVER",
+        note: "Verified foundation coursework.",
+        color: "#9cb2dd",
+    },
+    bronze: {
+        label: "BRONZE",
+        note: "Completion or participation record.",
+        color: "#cf7f59",
+    },
+} as const;
+
+type TierKey = keyof typeof tierInfo;
+
 type Achievement = {
     title: string;
-    meta: string;
-    description: string;
-    accent: "cyan" | "violet" | "amber";
-    tags: string[];
+    officialTitle: string;
+    issuer: string;
+    issued: string;
+    year: string;
+    category: string;
+    tier: TierKey;
+    proof: string[];
+    preview: string;
+    credential: string;
+    fileKind: "PDF" | "IMAGE";
 };
 
 const achievements: Achievement[] = [
     {
-        title: "CTF Highlights",
-        meta: "Write-ups, flags, and challenge wins",
-        description: "A dedicated space for standout solves, memorable machines, and the flags that shaped your offensive security workflow.",
-        accent: "cyan",
-        tags: ["CTF", "Write-ups", "Challenges"],
+        title: "Cisco Ethical Hacker",
+        officialTitle: "Ethical Hacker",
+        issuer: "Cisco Networking Academy",
+        issued: "Jun 16, 2026",
+        year: "2026",
+        category: "Role-aligned course",
+        tier: "gold",
+        proof: ["Cisco Networking Academy", "Verified certificate", "Professional-aligned track"],
+        preview: "/assets/hall-of-fame/cisco-ethical-hacker.png",
+        credential: "/assets/hall-of-fame/cisco-ethical-hacker.pdf",
+        fileKind: "PDF",
     },
     {
-        title: "Certifications",
-        meta: "Security learning milestones",
-        description: "Use this area to showcase certifications, training paths, and lab achievements that support your hands-on cyber work.",
-        accent: "violet",
-        tags: ["OSCP", "CPTS", "Labs"],
+        title: "Cybersecurity Foundation Course",
+        officialTitle: "ด้านความมั่นคงปลอดภัยไซเบอร์ ระดับพื้นฐาน",
+        issuer: "NCSA e-Learning / THNCA",
+        issued: "Apr 25, 2026",
+        year: "2026",
+        category: "Foundation course",
+        tier: "silver",
+        proof: ["21 hours", "Verification code shown", "NCSA-issued"],
+        preview: "/assets/hall-of-fame/ncsa-foundation-course.png",
+        credential: "/assets/hall-of-fame/ncsa-foundation-course.png",
+        fileKind: "IMAGE",
     },
     {
-        title: "Competition Log",
-        meta: "Events, rankings, and team runs",
-        description: "A clean timeline for competitions, placements, teammates, and short notes from each event you joined.",
-        accent: "amber",
-        tags: ["Events", "Rankings", "Teams"],
+        title: "Cisco Introduction to Cybersecurity",
+        officialTitle: "Introduction to Cybersecurity",
+        issuer: "Cisco Networking Academy",
+        issued: "May 5, 2026",
+        year: "2026",
+        category: "Foundation course",
+        tier: "silver",
+        proof: ["Student level credential", "Verified badge", "Cisco Networking Academy"],
+        preview: "/assets/hall-of-fame/cisco-introduction-to-cybersecurity.png",
+        credential: "/assets/hall-of-fame/cisco-introduction-to-cybersecurity.png",
+        fileKind: "IMAGE",
+    },
+    {
+        title: "NCSA CTF Boot Camp",
+        officialTitle: "NCSA CTF BOOT CAMP",
+        issuer: "NCSA / THNCA",
+        issued: "Apr 26, 2026",
+        year: "2026",
+        category: "Hands-on training",
+        tier: "bronze",
+        proof: ["Boot camp format", "Completion certificate", "NCSA training"],
+        preview: "/assets/hall-of-fame/ncsa-ctf-bootcamp.jpg",
+        credential: "/assets/hall-of-fame/ncsa-ctf-bootcamp.jpg",
+        fileKind: "IMAGE",
+    },
+    {
+        title: "MOOC Basic Cybersecurity",
+        officialTitle: "Basic Cybersecurity",
+        issuer: "MOOC Cybersecurity Learning Platform",
+        issued: "May 6, 2026",
+        year: "2026",
+        category: "Course completion",
+        tier: "bronze",
+        proof: ["Completion certificate", "Certificate ID shown", "NCSA Thailand ecosystem"],
+        preview: "/assets/hall-of-fame/mooc-basic-cybersecurity.jpg",
+        credential: "/assets/hall-of-fame/mooc-basic-cybersecurity.jpg",
+        fileKind: "IMAGE",
+    },
+    {
+        title: "Hack The Scammer CTF 2025",
+        officialTitle: "เข้าร่วมกิจกรรมการแข่งขัน HACK THE SCAMMER CTF 2025",
+        issuer: "NCSA / Ministry of Digital Economy and Society",
+        issued: "Dec 20, 2025",
+        year: "2025",
+        category: "Competition participation",
+        tier: "bronze",
+        proof: ["Competition participation", "Online event", "No ranking stated"],
+        preview: "/assets/hall-of-fame/hack-the-scammer-ctf-2025.png",
+        credential: "/assets/hall-of-fame/hack-the-scammer-ctf-2025.pdf",
+        fileKind: "PDF",
     },
 ];
+
+const totalCount = achievements.length;
+const totalYears = new Set(achievements.map((item) => item.year)).size;
+const goldCount = achievements.filter((item) => item.tier === "gold").length;
+const silverCount = achievements.filter((item) => item.tier === "silver").length;
+const bronzeCount = achievements.filter((item) => item.tier === "bronze").length;
+
+const yearGroups = Object.entries(
+    achievements.reduce((acc, item) => {
+        if (!acc[item.year]) {
+            acc[item.year] = [];
+        }
+        acc[item.year].push(item);
+        return acc;
+    }, {} as Record<string, Achievement[]>),
+).sort(([left], [right]) => Number(right) - Number(left));
 ---
 
 <GridLayout title={pageTitle} description={pageDescription}>
@@ -57,123 +156,519 @@ const achievements: Achievement[] = [
                 </p>
             </header>
 
-            <section class="hof-hero mb-8">
-                <p class="hof-kicker">Achievement Board</p>
-                <h2 class="hof-title">A dedicated space for your toughest wins.</h2>
-                <p class="hof-copy">
-                    This page is now wired into the navigation and ready to become the public record of your certifications,
-                    CTF milestones, competition history, and standout challenge solves.
-                </p>
-            </section>
+            <section class="hof-stage">
+                <aside class="hof-side">
+                    <p class="hof-side-kicker">Verified Record</p>
+                    <h2 class="hof-side-title">CERTIFICATE</h2>
+                    <p class="hof-side-copy">
+                        Real coursework, boot camps, and competition participation. Tiers are intentionally conservative.
+                    </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {achievements.map((item) => (
-                    <article class={`hof-card hof-${item.accent}`}>
-                        <div class="hof-card-bar"></div>
-                        <div class="flex flex-col gap-1">
-                            <p class="hof-meta">{item.meta}</p>
-                            <h2 class="text-xl font-bold text-black/90 dark:text-white/90">{item.title}</h2>
+                    <div class="hof-side-stats">
+                        <div class="hof-stat-card">
+                            <span class="hof-stat-value">{totalCount}</span>
+                            <span class="hof-stat-label">TOTAL</span>
                         </div>
-                        <p class="text-sm text-black/70 dark:text-white/70">{item.description}</p>
-                        <div class="flex flex-wrap gap-2 mt-1">
-                            {item.tags.map((tag) => (
-                                <span class="hof-tag">{tag}</span>
-                            ))}
+                        <div class="hof-stat-card">
+                            <span class="hof-stat-value">{totalYears}</span>
+                            <span class="hof-stat-label">YEARS</span>
                         </div>
-                    </article>
-                ))}
-            </div>
+                        <div class="hof-stat-card">
+                            <span class="hof-stat-value">{goldCount}</span>
+                            <span class="hof-stat-label">GOLD</span>
+                        </div>
+                        <div class="hof-stat-card">
+                            <span class="hof-stat-value">{silverCount + bronzeCount}</span>
+                            <span class="hof-stat-label">OTHER</span>
+                        </div>
+                    </div>
+
+                    <div class="hof-legend">
+                        {Object.entries(tierInfo).map(([tier, info]) => (
+                            <div class={`hof-legend-item hof-${tier}`}>
+                                <span class={`hof-tier-badge hof-tier-${tier}`}>{info.label}</span>
+                                <p>{info.note}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div class="hof-year-pills">
+                        {yearGroups.map(([year, items]) => (
+                            <div class="hof-year-pill">
+                                <span>{year}</span>
+                                <small>{items.length} ITEM{items.length > 1 ? "S" : ""}</small>
+                            </div>
+                        ))}
+                    </div>
+                </aside>
+
+                <div class="hof-board">
+                    {yearGroups.map(([year, items]) => (
+                        <section class="hof-year-section">
+                            <div class="hof-year-head">
+                                <h3 class="hof-year-title">{year}</h3>
+                                <span class="hof-year-count">{items.length} ITEM{items.length > 1 ? "S" : ""}</span>
+                            </div>
+
+                            <div class="hof-grid">
+                                {items.map((item) => (
+                                    <article class={`hof-card hof-${item.tier}`}>
+                                        <a
+                                            href={item.credential}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="hof-preview"
+                                        >
+                                            <img
+                                                src={item.preview}
+                                                alt={`${item.title} certificate preview`}
+                                                loading="lazy"
+                                            />
+                                        </a>
+
+                                        <div class="hof-card-top">
+                                            <span class={`hof-tier-badge hof-tier-${item.tier}`}>
+                                                {tierInfo[item.tier].label}
+                                            </span>
+                                            <span class="hof-file-kind">{item.fileKind}</span>
+                                        </div>
+
+                                        <div class="hof-card-body">
+                                            <p class="hof-card-category">{item.category}</p>
+                                            <h4 class="hof-card-title">{item.title}</h4>
+                                            <p class="hof-card-issuer">{item.issuer}</p>
+                                            <p class="hof-card-date">{item.issued}</p>
+                                            <p class="hof-card-official">{item.officialTitle}</p>
+                                        </div>
+
+                                        <div class="hof-card-bottom">
+                                            <div class="hof-tags">
+                                                {item.proof.slice(0, 2).map((proof) => (
+                                                    <span class="hof-tag">{proof}</span>
+                                                ))}
+                                            </div>
+
+                                            <a
+                                                href={item.credential}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="hof-open-link"
+                                            >
+                                                OPEN
+                                            </a>
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </section>
+                    ))}
+                </div>
+            </section>
         </div>
     </div>
 </GridLayout>
 
 <style>
-    .hof-hero {
-        border: 1px solid color-mix(in oklch, var(--primary), transparent 82%);
-        border-radius: calc(var(--radius-large) * 0.95);
-        padding: 1.5rem;
+    .hof-stage {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        align-items: start;
+    }
+
+    .hof-side,
+    .hof-year-section {
+        border: 1px solid rgba(126, 101, 216, 0.28);
+        border-radius: 1.2rem;
         background:
-            linear-gradient(135deg, color-mix(in oklch, var(--primary), transparent 92%), transparent 60%),
-            var(--card-bg);
+            linear-gradient(180deg, rgba(30, 28, 58, 0.92), rgba(14, 12, 31, 0.96)),
+            rgba(14, 12, 31, 0.94);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            0 0 0 1px rgba(72, 52, 132, 0.14),
+            0 18px 42px rgba(7, 7, 21, 0.34);
     }
 
-    .hof-kicker {
-        font-size: 0.78rem;
-        letter-spacing: 0.18em;
+    .hof-side {
+        padding: 1.15rem 1.2rem;
+        position: static;
+    }
+
+    .hof-side-kicker,
+    .hof-card-category,
+    .hof-year-count {
+        font-family: "Press Start 2P", var(--font-mono), monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--primary);
-        margin-bottom: 0.75rem;
     }
 
-    .hof-title {
-        font-size: clamp(1.45rem, 2vw, 2.3rem);
-        font-weight: 700;
-        color: color-mix(in oklch, var(--text-normal), white 8%);
-        margin-bottom: 0.65rem;
+    .hof-side-kicker {
+        color: #79d9ff;
+        margin-bottom: 1rem;
     }
 
-    .hof-copy {
-        max-width: 52rem;
-        color: color-mix(in oklch, var(--text-normal), transparent 28%);
-        line-height: 1.7;
+    .hof-side-title,
+    .hof-year-title {
+        font-family: "Press Start 2P", var(--font-mono), monospace;
+        letter-spacing: 0;
+        text-transform: uppercase;
+    }
+
+    .hof-side-title {
+        font-size: clamp(1.65rem, 2.4vw, 2.55rem);
+        line-height: 1.02;
+        color: #ffc35c;
+        text-shadow:
+            0 0 10px rgba(255, 195, 92, 0.58),
+            0 0 24px rgba(255, 166, 63, 0.24);
+        margin-bottom: 1rem;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .hof-side-copy {
+        color: rgba(235, 235, 255, 0.76);
+        line-height: 1.8;
+        margin-bottom: 1.2rem;
+        max-width: 58rem;
+    }
+
+    .hof-side-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .hof-stat-card {
+        min-height: 4.8rem;
+        border-radius: 1rem;
+        padding: 0.85rem 0.9rem;
+        border: 1px solid rgba(122, 111, 177, 0.24);
+        background: rgba(15, 20, 30, 0.62);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.28rem;
+    }
+
+    .hof-stat-value {
+        font-family: "Press Start 2P", var(--font-mono), monospace;
+        font-size: 1.08rem;
+        color: rgba(255, 255, 255, 0.96);
+    }
+
+    .hof-stat-label {
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        color: rgba(215, 214, 240, 0.72);
+    }
+
+    .hof-legend {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .hof-legend-item {
+        padding: 0.85rem 0.9rem;
+        border-radius: 0.95rem;
+        border: 1px solid rgba(122, 111, 177, 0.22);
+        background: rgba(13, 16, 26, 0.58);
+    }
+
+    .hof-legend-item p {
+        margin-top: 0.6rem;
+        color: rgba(220, 220, 240, 0.72);
+        line-height: 1.6;
+        font-size: 0.92rem;
+    }
+
+    .hof-year-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+    }
+
+    .hof-year-pill {
+        min-width: 6.4rem;
+        border-radius: 999px;
+        padding: 0.55rem 0.9rem;
+        border: 1px solid rgba(122, 111, 177, 0.24);
+        background: rgba(13, 16, 26, 0.58);
+        display: flex;
+        flex-direction: column;
+        gap: 0.18rem;
+    }
+
+    .hof-year-pill span {
+        font-family: "Press Start 2P", var(--font-mono), monospace;
+        font-size: 0.64rem;
+        color: rgba(255, 255, 255, 0.94);
+    }
+
+    .hof-year-pill small {
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        color: rgba(201, 200, 226, 0.72);
+    }
+
+    .hof-board {
+        display: grid;
+        gap: 1.1rem;
+    }
+
+    .hof-year-section {
+        padding: 1.15rem;
+    }
+
+    .hof-year-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-bottom: 0.85rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(120, 111, 177, 0.18);
+    }
+
+    .hof-year-title {
+        font-size: clamp(0.96rem, 1.25vw, 1.15rem);
+        color: #ffc35c;
+        text-shadow: 0 0 10px rgba(255, 195, 92, 0.32);
+    }
+
+    .hof-year-count {
+        color: rgba(218, 218, 236, 0.66);
+    }
+
+    .hof-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
     }
 
     .hof-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: var(--radius-large);
-        border: 1px solid var(--line-divider);
-        background: var(--card-bg);
-        padding: 1.35rem;
+        min-height: 100%;
+        border-radius: 1rem;
+        border: 1px solid rgba(126, 101, 216, 0.22);
+        background:
+            linear-gradient(180deg, rgba(22, 20, 46, 0.96), rgba(12, 11, 29, 0.98));
+        padding: 0.8rem;
         display: flex;
         flex-direction: column;
-        gap: 0.9rem;
-        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        gap: 0.85rem;
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
     }
 
     .hof-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 32px color-mix(in oklch, black, transparent 80%);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 34px rgba(6, 7, 20, 0.34);
     }
 
-    .hof-card-bar {
-        width: 3.2rem;
-        height: 0.3rem;
+    .hof-preview {
+        display: block;
+        aspect-ratio: 16 / 10;
+        padding: 0.45rem;
+        border-radius: 0.9rem;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(10, 11, 24, 0.72);
+    }
+
+    .hof-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        border-radius: 0.55rem;
+    }
+
+    .hof-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    .hof-tier-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 5.65rem;
         border-radius: 999px;
-        background: currentColor;
-        opacity: 0.95;
+        padding: 0.4rem 0.82rem;
+        border: 1px solid currentColor;
+        font-family: "Press Start 2P", var(--font-mono), monospace;
+        font-size: 0.56rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.03);
     }
 
-    .hof-meta {
-        font-size: 0.78rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: currentColor;
-        opacity: 0.92;
+    .hof-tier-gold {
+        color: #efb94e;
+        box-shadow: inset 0 0 0 1px rgba(239, 185, 78, 0.12);
+    }
+
+    .hof-tier-silver {
+        color: #9cb2dd;
+        box-shadow: inset 0 0 0 1px rgba(156, 178, 221, 0.12);
+    }
+
+    .hof-tier-bronze {
+        color: #cf7f59;
+        box-shadow: inset 0 0 0 1px rgba(207, 127, 89, 0.12);
+    }
+
+    .hof-file-kind {
+        font-family: "Press Start 2P", var(--font-mono), monospace;
+        font-size: 0.54rem;
+        color: rgba(220, 220, 240, 0.64);
+    }
+
+    .hof-card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.36rem;
+        flex: 1;
+    }
+
+    .hof-card-category {
+        color: #79d9ff;
+    }
+
+    .hof-card-title {
+        font-size: 1.16rem;
+        line-height: 1.28;
+        font-weight: 700;
+        color: rgba(252, 252, 255, 0.96);
+    }
+
+    .hof-card-issuer,
+    .hof-card-date {
+        font-size: 0.86rem;
+        color: rgba(205, 204, 229, 0.7);
+    }
+
+    .hof-card-official {
+        margin-top: 0.35rem;
+        font-size: 0.9rem;
+        line-height: 1.58;
+        color: rgba(238, 238, 248, 0.86);
+    }
+
+    .hof-card-bottom {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 0.8rem;
+    }
+
+    .hof-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
     }
 
     .hof-tag {
         display: inline-flex;
         align-items: center;
+        min-height: 1.6rem;
+        padding: 0.2rem 0.58rem;
         border-radius: 999px;
-        padding: 0.28rem 0.7rem;
-        font-size: 0.78rem;
-        background: color-mix(in oklch, currentColor, transparent 88%);
-        color: currentColor;
+        border: 1px solid rgba(122, 111, 177, 0.2);
+        background: rgba(16, 18, 30, 0.75);
+        font-size: 0.72rem;
+        color: rgba(228, 227, 245, 0.72);
     }
 
-    .hof-cyan {
-        color: #35c8ff;
-        border-color: color-mix(in oklch, #35c8ff, transparent 72%);
+    .hof-open-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 4.5rem;
+        min-height: 2rem;
+        padding: 0.2rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid rgba(144, 118, 230, 0.38);
+        background: rgba(88, 61, 179, 0.2);
+        color: rgba(246, 245, 255, 0.92);
+        font-family: "Press Start 2P", var(--font-mono), monospace;
+        font-size: 0.54rem;
+        text-decoration: none;
+        transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
     }
 
-    .hof-violet {
-        color: #9e7dff;
-        border-color: color-mix(in oklch, #9e7dff, transparent 72%);
+    .hof-open-link:hover {
+        transform: translateY(-1px);
+        background: rgba(102, 71, 208, 0.3);
+        border-color: rgba(161, 137, 239, 0.56);
     }
 
-    .hof-amber {
-        color: #ffb347;
-        border-color: color-mix(in oklch, #ffb347, transparent 72%);
+    .hof-gold {
+        border-color: rgba(239, 185, 78, 0.26);
+    }
+
+    .hof-silver {
+        border-color: rgba(156, 178, 221, 0.24);
+    }
+
+    .hof-bronze {
+        border-color: rgba(207, 127, 89, 0.24);
+    }
+
+    @media (min-width: 1600px) {
+        .hof-stage {
+            grid-template-columns: minmax(17rem, 19rem) minmax(0, 1fr);
+            gap: 1.15rem;
+        }
+
+        .hof-side {
+            position: sticky;
+            top: 1.25rem;
+        }
+
+        .hof-side-stats {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .hof-legend {
+            grid-template-columns: 1fr;
+        }
+
+        .hof-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 720px) {
+        .hof-side,
+        .hof-year-section {
+            padding: 1rem;
+        }
+
+        .hof-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hof-side-stats {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .hof-legend {
+            grid-template-columns: 1fr;
+        }
+
+        .hof-card-bottom {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .hof-open-link {
+            width: 100%;
+        }
     }
 </style>
