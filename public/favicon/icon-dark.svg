@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bg-dark" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#15396F"/>
+      <stop offset="0.52" stop-color="#0A1732"/>
+      <stop offset="1" stop-color="#070B1C"/>
+    </linearGradient>
+    <linearGradient id="glyph-dark" x1="18" y1="18" x2="45" y2="45" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9FE8FF"/>
+      <stop offset="0.48" stop-color="#7AB0FF"/>
+      <stop offset="1" stop-color="#B18DFF"/>
+    </linearGradient>
+    <filter id="glow-dark" x="12" y="12" width="40" height="40" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+  </defs>
+
+  <rect x="4" y="4" width="56" height="56" rx="15" fill="url(#bg-dark)"/>
+  <rect x="5" y="5" width="54" height="54" rx="14" stroke="#7EB9FF" stroke-opacity="0.18" stroke-width="2"/>
+
+  <path d="M20 18H29L33 25L37 18H46L38 31.5L47 46H38L33 38.5L28 46H19L28 31.5L20 18Z" fill="#70D7FF" fill-opacity="0.34" filter="url(#glow-dark)"/>
+  <path d="M20 18H29L33 25L37 18H46L38 31.5L47 46H38L33 38.5L28 46H19L28 31.5L20 18Z" fill="url(#glyph-dark)"/>
+
+  <circle cx="47.5" cy="17.5" r="3.5" fill="#FFB54A"/>
+  <circle cx="47.5" cy="17.5" r="1.35" fill="#FFF2C7"/>
+</svg>

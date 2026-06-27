@@ -3,13 +3,13 @@ import type { Favicon } from "@/types/config.ts";
 
 export const defaultFavicons: Favicon[] = [
     {
-        src: "/favicon/icon-light.ico",
+        src: "/favicon/icon-light.svg",
         theme: "light",
-        sizes: "96x96",
+        sizes: "any",
     },
     {
-        src: "/favicon/icon-dark.ico",
+        src: "/favicon/icon-dark.svg",
         theme: "dark",
-        sizes: "96x96",
+        sizes: "any",
     },
 ];

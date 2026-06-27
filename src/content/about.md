@@ -8,7 +8,7 @@ Hi, I'm **Phichit Sapnan** - most people call me **Wang**, and online I go by **
 
 I'm a Computer Science student from Thailand working at the intersection of **offensive security** and **agentic AI systems**. By day I break web apps, networks, and Active Directory in CTFs and lab environments; by night I'm engineering multi-agent AI ecosystems and writing down everything I learn along the way.
 
-> "Breaking things to understand them, then writing it all down."
+> "Breaking systems to learn, writing code and context to remember."
 
 This site is the casual side of my portfolio - a public lab notebook of challenges I've solved, competitions I've joined, tools I've built, and notes from a journey that bounces between red team work and AI research.
 
