@@ -139,3 +139,180 @@ https://svelte.dev/e/script_context_deprecated
 https://svelte.dev/e/script_context_deprecated
 [2m15:58:59[22m [34m[200][39m /hall-of-fame/ [2m72ms[22m
 [2m15:59:00[22m [34m[200][39m /blog/ [2m71ms[22m
+[2m16:01:18[22m [34m[200][39m /archive/ [2m57ms[22m
+[2m16:04:29[22m [34m[watch][39m pnpm-workspace.yaml
+[2m16:04:29[22m [34m[watch][39m pnpm-workspace.yaml
+[33m[1m16:04:29[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[33m[1m16:04:30[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:04:30[22m [34m[200][39m / [2m268ms[22m
+[33m[1m16:04:30[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:04:30[22m [34m[200][39m / [2m45ms[22m
+[2m16:04:48[22m [34m[200][39m /about/ [2m51ms[22m
+[2m16:05:26[22m [34m[watch][39m pnpm-workspace.yaml
+[2m16:05:26[22m [34m[watch][39m pnpm-workspace.yaml
+[33m[1m16:05:26[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[33m[1m16:05:26[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:05:26[22m [34m[200][39m / [2m326ms[22m
+[33m[1m16:05:27[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:05:27[22m [34m[200][39m / [2m52ms[22m
+[2m16:06:17[22m [34m[watch][39m /src/styles/main.css, /src/layouts/base.astro?astro&type=style&index=1&lang.css, /@fs/C:\Users\phichitio\Documents\GitHub\Portfolio-Preview\src\components\common\icon.svelte
+[2m16:06:17[22m [34m[watch][39m src/utils/icons.ts
+[33m[1m16:06:17[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/404.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/FooterConfig.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/admin/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/archive/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/albums/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/about/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/atom/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/blog/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/diary/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/hall-of-fame/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/anime/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/skills/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/rss/index.html
+[2m16:06:46[22m [34m[watch][39m .vercel/output/static/projects/index.html
+[2m16:06:47[22m [34m[watch][39m .vercel/output/static/timeline/index.html
+[2m16:07:17[22m [34m[watch][39m .vercel/output/static/404.html
+[2m16:07:17[22m [34m[watch][39m .vercel/output/static/albums/index.html
+[2m16:07:17[22m [34m[watch][39m .vercel/output/static/about/index.html
+[2m16:07:17[22m [34m[watch][39m .vercel/output/static/admin/index.html
+[2m16:07:17[22m [34m[watch][39m .vercel/output/static/anime/index.html
+[2m16:07:17[22m [34m[watch][39m .vercel/output/static/archive/index.html
+[2m16:07:17[22m [34m[watch][39m .vercel/output/static/FooterConfig.html
+[2m16:07:17[22m [34m[watch][39m .vercel/output/static/index.html
+[2m16:07:18[22m [34m[watch][39m .vercel/output/static/blog/index.html
+[2m16:07:18[22m [34m[watch][39m .vercel/output/static/atom/index.html
+[2m16:07:18[22m [34m[watch][39m .vercel/output/static/hall-of-fame/index.html
+[2m16:07:18[22m [34m[watch][39m .vercel/output/static/diary/index.html
+[2m16:07:18[22m [34m[watch][39m .vercel/output/static/projects/index.html
+[2m16:07:18[22m [34m[watch][39m .vercel/output/static/rss/index.html
+[2m16:07:18[22m [34m[watch][39m .vercel/output/static/timeline/index.html
+[2m16:07:18[22m [34m[watch][39m .vercel/output/static/skills/index.html
+[2m16:12:12[22m [34m[watch][39m scripts/build-with-pagefind.cjs
+[2m16:12:12[22m [34m[watch][39m scripts/build-with-pagefind.cjs
+[33m[1m16:12:12[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[33m[1m16:12:12[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:12:13[22m [34m[200][39m / [2m411ms[22m
+[33m[1m16:12:13[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:12:13[22m [34m[200][39m / [2m83ms[22m
+[2m16:12:27[22m [34m[watch][39m /src/styles/main.css, /src/layouts/base.astro?astro&type=style&index=1&lang.css, /@fs/C:\Users\phichitio\Documents\GitHub\Portfolio-Preview\src\components\common\icon.svelte
+[2m16:12:27[22m [34m[watch][39m src/utils/icons.ts
+[33m[1m16:12:28[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/404.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/about/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/FooterConfig.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/archive/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/albums/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/admin/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/atom/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/anime/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/blog/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/diary/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/projects/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/skills/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/timeline/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/rss/index.html
+[2m16:12:55[22m [34m[watch][39m .vercel/output/static/hall-of-fame/index.html
+[2m16:13:32[22m [34m[watch][39m .vercel/output/static/404.html
+[2m16:13:32[22m [34m[watch][39m .vercel/output/static/admin/index.html
+[2m16:13:32[22m [34m[watch][39m .vercel/output/static/about/index.html
+[2m16:13:32[22m [34m[watch][39m .vercel/output/static/albums/index.html
+[2m16:13:32[22m [34m[watch][39m .vercel/output/static/archive/index.html
+[2m16:13:32[22m [34m[watch][39m .vercel/output/static/anime/index.html
+[2m16:13:33[22m [34m[watch][39m .vercel/output/static/FooterConfig.html
+[2m16:13:33[22m [34m[watch][39m .vercel/output/static/index.html
+[2m16:13:33[22m [34m[watch][39m .vercel/output/static/atom/index.html
+[2m16:13:33[22m [34m[watch][39m .vercel/output/static/blog/index.html
+[2m16:13:33[22m [34m[watch][39m .vercel/output/static/diary/index.html
+[2m16:13:33[22m [34m[watch][39m .vercel/output/static/hall-of-fame/index.html
+[2m16:13:34[22m [34m[watch][39m .vercel/output/static/rss/index.html
+[2m16:13:38[22m [34m[watch][39m .vercel/output/static/timeline/index.html
+[2m16:13:38[22m [34m[watch][39m .vercel/output/static/projects/index.html
+[2m16:13:38[22m [34m[watch][39m .vercel/output/static/skills/index.html
+[33m[1m16:13:39[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+4:13:39 PM [vite-plugin-svelte] C:/Users/phichitio/Documents/GitHub/Portfolio-Preview/src/components/sidebar/statistics.svelte:1:8 `context="module"` is deprecated, use the `module` attribute instead
+https://svelte.dev/e/script_context_deprecated
+[33m[1m16:13:40[22m [WARN] [vite][39m [33m[vite:css][postcss] @import must precede all other statements (besides @charset or empty @layer)
+5053|    }
+5054|  }
+5055|  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5056|  @font-face {
+5057|    font-family: 'Novecento';[39m
+[2m16:13:41[22m [34m[200][39m /about/ [2m918ms[22m
+[2m16:13:41[22m [34m[200][39m /hall-of-fame/ [2m978ms[22m
