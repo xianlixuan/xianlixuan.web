@@ -205,6 +205,29 @@ const { enabled: analyticsEnabled, code: analyticsCode } = getAnalyticsConfig();
             offset = offset - offset % 4;
             document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
         </script>
+        <script is:inline>
+            (() => {
+                const blinkDuration = 1450;
+                const syncTerminalCursorBlink = () => {
+                    const offset = -(Date.now() % blinkDuration);
+                    document.documentElement.style.setProperty('--terminal-cursor-sync-delay', `${offset}ms`);
+                };
+
+                window.syncTerminalCursorBlink = syncTerminalCursorBlink;
+
+                if (!window.__terminalCursorBlinkSyncInit) {
+                    window.__terminalCursorBlinkSyncInit = true;
+
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', syncTerminalCursorBlink, { once: true });
+                    }
+
+                    document.addEventListener('astro:after-swap', syncTerminalCursorBlink);
+                }
+
+                syncTerminalCursorBlink();
+            })();
+        </script>
         <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
         <style define:vars={{
             configHue,

@@ -39,7 +39,7 @@
 .navbar-brand-title-row {
     display: flex;
     align-items: center;
-    gap: 0.36rem;
+    gap: 0.2rem;
 }
 
 .navbar-brand-title {
@@ -53,24 +53,7 @@
 }
 
 .navbar-brand-cursor {
-    width: 0.34rem;
-    height: 0.86rem;
-    flex-shrink: 0;
-    border-radius: 1px;
-    background: currentColor;
-    color: rgba(224, 232, 255, 0.9);
-    box-shadow: none;
-    animation: navbar-brand-cursor-fade 1.25s ease-in-out infinite;
-}
-
-@keyframes navbar-brand-cursor-fade {
-    0%,
-    100% {
-        opacity: 0.88;
-    }
-    55% {
-        opacity: 0.16;
-    }
+    font-size: clamp(0.72rem, 0.82vw, 0.92rem);
 }
 
 /* 小屏幕时只显示图标 */
@@ -286,8 +269,7 @@
     }
 
     .navbar-brand-cursor {
-        width: 0.36rem;
-        height: 0.82rem;
+        font-size: 0.68rem;
     }
 }
 /* 手机端导航栏 - 小屏 */
@@ -329,8 +311,7 @@
     }
 
     .navbar-brand-cursor {
-        width: 0.32rem;
-        height: 0.74rem;
+        font-size: 0.6rem;
     }
 }
 
@@ -364,8 +345,7 @@
     }
 
     .navbar-brand-cursor {
-        width: 0.28rem;
-        height: 0.64rem;
+        font-size: 0.54rem;
     }
 }
 
@@ -392,7 +372,6 @@
     }
 
     .navbar-brand-cursor {
-        width: 0.24rem;
-        height: 0.56rem;
+        font-size: 0.49rem;
     }
 }

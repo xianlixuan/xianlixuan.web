@@ -30,7 +30,7 @@ const thaiParagraphs = [
 
         <div class="intro-prompt-row font-mono">
             <span class="intro-prompt">&gt;_</span>
-            <span class="intro-typewriter" data-lines={JSON.stringify(promptLines)}></span><span class="intro-caret" aria-hidden="true"></span>
+            <span class="intro-typewriter" data-lines={JSON.stringify(promptLines)}></span><span class="intro-caret terminal-sync-cursor" aria-hidden="true"></span>
         </div>
 
         <div class="intro-copy leading-relaxed space-y-4 text-[15px] md:text-base">
@@ -183,13 +183,7 @@ const thaiParagraphs = [
     }
 
     .intro-caret {
-        display: inline-block;
-        width: 0.56rem;
-        height: 1.05em;
-        border-radius: 999px;
-        background: rgba(201, 184, 255, 0.88);
-        box-shadow: 0 0 12px rgba(201, 184, 255, 0.18);
-        animation: intro-caret-fade 1.45s ease-in-out infinite;
+        margin-left: 0.08rem;
     }
 
     .intro-copy {
@@ -236,15 +230,6 @@ const thaiParagraphs = [
     .intro-copy-th p,
     .intro-copy-th strong {
         font-style: normal !important;
-    }
-
-    @keyframes intro-caret-fade {
-        0%, 44% {
-            opacity: 1;
-        }
-        60%, 100% {
-            opacity: 0.18;
-        }
     }
 
     @media (max-width: 640px) {
